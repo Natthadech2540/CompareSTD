@@ -1,0 +1,545 @@
+﻿@{
+    ViewData["Title"] = "UploadDB";
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewData["Title"]</title>
+    <style>
+        
+        /* Custom background for the card */
+        .bg-custom {
+            background-color: #007b80;
+            color: #ffffff;
+            border-radius: 12px; /* Rounded corners for smooth look */
+            padding: 30px; /* Spacious padding */
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1); /* Soft shadow for depth */
+            transition: transform 0.3s ease-in-out; /* Smooth hover effect */
+        }
+
+        /* Hover effect for card */
+        .bg-custom:hover {
+            transform: scale(1.05); /* Slight zoom on hover */
+        }
+
+        /* Custom header style */
+        .bg-custom h3 {
+            font-size: 28px;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        }
+
+        .bg-custom .fas {
+            margin-right: 15px; /* Space between icon and text */
+            font-size: 40px; /* Larger icon */
+        }
+
+        /* Style for buttons */
+        .btn-custom {
+            border-radius: 30px;
+            font-weight: bold;
+            padding: 12px 25px;
+            transition: all 0.3s ease;
+            text-transform: uppercase; /* Uppercase text */
+        }
+
+        .btn-success {
+            background-color: #28a745;
+            border-color: #28a745;
+        }
+
+        .btn-success:hover {
+            background-color: #218838;
+            border-color: #1e7e34;
+        }
+
+        .btn-secondary {
+            background-color: #6c757d;
+            border-color: #6c757d;
+        }
+
+        .btn-secondary:hover {
+            background-color: #5a6268;
+            border-color: #545b62;
+        }
+
+        /* ทำให้เนื้อหาของหน้าไม่สามารถคลิกได้ระหว่างโหลด */
+        body.loading, body.loading * {
+            pointer-events: none;
+        }
+
+        /* เพิ่มสไตล์ให้กับ Preloader */
+        #loadingIndicator, #loadingIndicatorMaster {
+            display: none;
+            text-align: center;
+            position: fixed;
+            width: 1000px;
+            height: 500px;
+            top: 5px; /* ย้ายขึ้นมาด้านบน */
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(0, 0, 0, 0.75);
+            padding: 30px; /* เพิ่มขนาดของ padding */
+            border-radius: 15px;
+            color: white;
+            z-index: 9999;
+            font-family: "Poppins", sans-serif;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+            animation: fadeIn 0.3s ease-in-out;
+            pointer-events: auto; /* ทำให้ Preloader สามารถคลิกได้ */
+        }
+
+        /* ปรับขนาดของวงกลมหมุน */
+        #loadingIndicator .spinner-border, #loadingIndicatorMaster .spinner-border {
+            width: 200px;  /* ขยายขนาดให้เหมาะสม */
+            height: 200px;
+            border-width: 15px; /* เพิ่มความหนาของขอบ */
+            border-color: rgba(255, 255, 255, 0.2);
+            border-top-color: #00ffcc;  /* สีฟ้าเขียว */
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        /* แอนิเมชันหมุน */
+        @@keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* ข้อความ Loading */
+        #loadingIndicator p, #loadingIndicatorMaster p {
+            font-size: 30px; /* เพิ่มขนาดตัวอักษร */
+            font-weight: bold;
+            margin-top: 20px;
+            color: #ffffff;
+            text-shadow: 0px 0px 10px #00ffcc; /* เพิ่มเอฟเฟกต์เรืองแสง */
+            letter-spacing: 2px;
+            animation: fadeText 1.5s ease-in-out infinite;
+        }
+
+        /* เอฟเฟกต์ข้อความจาง-ชัด */
+        @@keyframes fadeText {
+            0% { opacity: 0.3; }
+            50% { opacity: 1; }
+            100% { opacity: 0.3; }
+        }
+
+
+        /* Input file style */
+        #fileInput {
+            font-weight: bold;
+            cursor: pointer;
+            padding: 12px;
+            border: 2px solid #007b80;
+            border-radius: 5px;
+            width: 100%;
+            background-color: #f8f9fa;
+        }
+
+        #fileInput:focus {
+            border-color: #005f6a; /* Darker border when focused */
+            outline: none;
+        }
+
+        /* Input file style */
+        #fileInputMaster {
+            font-weight: bold;
+            cursor: pointer;
+            padding: 12px;
+            border: 2px solid #007b80;
+            border-radius: 5px;
+            width: 100%;
+            background-color: #f8f9fa;
+        }
+
+        #fileInputMaster:focus {
+            border-color: #005f6a; /* Darker border when focused */
+            outline: none;
+        }
+
+        /* Card body */
+        .card-body {
+            padding: 30px;
+        }
+
+        /* Card footer */
+        .card-footer {
+            background-color: #f8f9fa;
+            text-align: center;
+            font-size: 16px;
+            color: #6c757d;
+            font-weight: bold;
+        }
+
+        /* Custom styling for the radio buttons */
+        .form-check-inline {
+            margin-right: 25px;
+            font-size: 18px;
+        }
+
+        .form-check-input {
+            position: absolute;
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .form-check-label {
+            position: relative;
+            padding-left: 35px;
+            cursor: pointer;
+            font-size: 20px;
+            font-weight: bold;
+            color: #333;
+        }
+
+        .form-check-label .radio-custom-label {
+            display: inline-block;
+            padding-left: 12px;
+        }
+
+        .radio-custom-top {
+            display: inline-block;
+            padding-left: 12px;
+            border: 2px solid #4CAF50; /* กรอบสีเขียว */
+            border-radius: 10px; /* มุมโค้งมน */
+            background-color: #f9f9f9; /* พื้นหลังสีอ่อน */
+            padding: 5px; /* ระยะห่างภายใน */
+            text-align: center; /* จัดข้อความกึ่งกลาง */
+            font-size: 20px; /* ขนาดตัวอักษร */
+            font-weight: bold; /* ตัวหนา */
+            color: #007b80; /* สีข้อความ */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* เงา */
+        }
+
+        .form-check-label:hover {
+            color: #007b80; /* Text color changes on hover */
+            transform: scale(1.05); /* Slight scale effect on hover */
+        }
+
+        .form-check-input:checked + .form-check-label::before {
+            background-color: #007b80;
+            border-color: #007b80;
+        }
+
+        .form-check-label::before {
+            content: "";
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 22px;
+            height: 22px;
+            border-radius: 50%;
+            border: 2px solid #007b80;
+            background-color: #fff;
+            transition: all 0.3s;
+        }
+
+        .form-check-input:checked + .form-check-label::after {
+            content: "";
+            position: absolute;
+            left: 6px;
+            top: 6px;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background-color: #007b80;
+            transition: all 0.3s;
+        }
+
+        .form-check-input:focus + .form-check-label::before {
+            box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+        }
+
+        .form-check-label:hover::before {
+            border-color: #005f6a;
+        }
+
+        /* New styles for the category selection */
+        .category-options {
+            display: none; /* Hidden by default */
+            margin-top: 20px;
+        }
+
+        .nav-tabs .nav-link.active {
+            background-color: #005f6a;
+            color: white !important;
+            border-color: #007b80 #007b80 #fff;
+        }
+
+        button.nav-link.disabled {
+            pointer-events: none;
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+    </style>
+</head>
+<body class="bg-light">
+   <div class="container mt-0">
+    <div class="card shadow-lg border-light">
+        <div class="card-header bg-custom text-white">
+            <h3 class="mb-0">
+                <i class="fas fa-upload me-3"></i> <!-- Upload icon -->
+                <b>Upload Excel or CSV File</b>
+            </h3>
+        </div>
+        
+        <div class="container mt-1">
+            <!-- Tabs Navigation -->
+            <ul class="nav nav-tabs" id="uploadTabs" role="tablist">
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link active" id="tab-upload-data" data-bs-toggle="tab" data-bs-target="#upload-data" type="button" role="tab" aria-controls="upload-data" aria-selected="true">
+                        <b>Upload Data (AS400 & SAP)</b>
+                    </button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link disabled" id="tab-master-data" data-bs-toggle="tab" data-bs-target="#master-data" type="button" role="tab" aria-controls="master-data" aria-selected="false" disabled>
+                        <b>Upload Master Data (Basic & Unit)</b>
+                    </button>
+                </li>
+            </ul>
+
+            <!-- Tabs Content -->
+            <div class="tab-content" id="uploadTabsContent">
+                <!-- Tab 1: Upload Data -->
+                <div class="tab-pane fade show active" id="upload-data" role="tabpanel" aria-labelledby="tab-upload-data">
+                    <div class="card-body">
+                        <p class="mb-4" style="font-size: 16px;">Please upload a valid Excel (.xlsx) or CSV (.csv) file to continue with the process.</p>
+                        <form asp-action="Upload" method="post" enctype="multipart/form-data">
+                            <div class="mb-4">
+                                <!-- Radio buttons for system type -->
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" name="systemType" id="radioAS400" value="AS400" required>
+                                    <label class="form-check-label" for="radioAS400">
+                                        <span class="radio-custom-top">AS400</span>
+                                    </label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" name="systemType" id="radioSAP" value="SAP" required>
+                                    <label class="form-check-label" for="radioSAP">
+                                        <span class="radio-custom-top">SAP</span>
+                                    </label>
+                                </div>
+                            </div>
+
+                            <div class="category-options" id="categoryOptions">
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" name="category" id="totalstdCost" value="totalstdCost" required>
+                                    <label class="form-check-label" for="totalstdCost">
+                                        <span class="radio-custom-label">Total STD Cost by Model</span>
+                                    </label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" name="category" id="materialCost" value="MaterialCost" required>
+                                    <label class="form-check-label" for="materialCost">
+                                        <span class="radio-custom-label">Material Cost by BOM</span>
+                                    </label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" name="category" id="processOH" value="ProcessOH" required>
+                                    <label class="form-check-label" for="processOH">
+                                        <span class="radio-custom-label">Process & OH Cost</span>
+                                    </label>
+                                </div>
+                            </div>
+
+                            <!-- Tab 1: File Input -->
+                            <div class="mb-4">
+                                <input class="form-control" type="file" id="fileInput" name="file" accept=".csv, .xlsx, .xlsb">
+                            </div>
+                            <div class="d-flex justify-content-between">
+                                <button type="submit" class="btn btn-success btn-custom">Upload</button>
+                                <button type="reset" class="btn btn-secondary btn-custom">Reset</button>
+                            </div>
+                        </form>
+
+                        <!-- Loading Indicator -->
+                        <div id="loadingIndicator" class="text-center mt-4" style="display: none;">
+                            <div class="spinner-border text-primary" role="status">
+                                <span class="visually-hidden">Loading...</span>
+                            </div>
+                            <p class="mt-2">Uploading...</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tab 2: Master Data -->
+                <div class="tab-pane fade" id="master-data" role="tabpanel" aria-labelledby="tab-master-data">
+                    <div class="card-body">
+                        <p class="mb-4" style="font-size: 16px;">Please upload the Master Basic or Master Unit data in a valid Excel (.xlsx) or CSV (.csv) file.</p>
+                        <form asp-action="UploadMasterData" method="post" enctype="multipart/form-data">
+                            <div class="mb-4">
+                                <!-- Radio buttons for master data type -->
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" name="masterType" id="masterBasic" value="MasterBasic" required>
+                                    <label class="form-check-label" for="masterBasic">
+                                        <span class="radio-custom-top">Master Basic</span>
+                                    </label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" name="masterType" id="masterUnit" value="MasterUnit" required>
+                                    <label class="form-check-label" for="masterUnit">
+                                        <span class="radio-custom-top">Master Unit</span>
+                                    </label>
+                                </div>
+                            </div>
+                            <!-- Tab 2: File Input -->
+                            <div class="mb-4">
+                                <input class="form-control" type="file" id="fileInputMaster" name="file" accept=".csv, .xlsx, .xlsb">
+                            </div>
+                            <div class="d-flex justify-content-between">
+                                <button type="submit" class="btn btn-success btn-custom">Upload</button>
+                                <button type="reset" class="btn btn-secondary btn-custom">Reset</button>
+                            </div>
+                        </form>
+
+                        <!-- Loading Indicator for Tab 2 -->
+                        <div id="loadingIndicatorMaster" class="text-center mt-4" style="display: none;">
+                            <div class="spinner-border text-primary" role="status">
+                                <span class="visually-hidden">Loading...</span>
+                            </div>
+                            <p class="mt-2">Uploading...</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card-footer text-muted text-center" >
+            Supported formats: .csv, .xlsx
+        </div>
+    </div>
+</div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+    // Show category options when either AS400 or SAP is selected
+    document.querySelectorAll('input[name="systemType"]').forEach(radio => {
+        radio.addEventListener('change', function() {
+            if (document.getElementById('radioAS400').checked || document.getElementById('radioSAP').checked) {
+                document.getElementById('categoryOptions').style.display = 'block';
+            }
+        });
+    });
+
+    // Reset the form and hide additional options
+    document.querySelector('form').addEventListener('reset', function () {
+        const additionalOptions = document.getElementById('additionalOptions');
+        const categoryOptions = document.getElementById('categoryOptions');
+        
+        // Hide category options when form is reset
+        categoryOptions.style.display = 'none';
+
+        // Optional: hide other sections if needed
+        additionalOptions.style.display = 'none'; // Hide additional options if needed
+    });
+
+    // Show loading indicator on form submission
+    document.querySelectorAll('form').forEach((form) => {
+        form.addEventListener('submit', function (e) {
+            // Get the file input specific to the current form
+            const fileInput = this.querySelector('input[type="file"]');
+            const file = fileInput?.files[0];
+
+            // If no file is selected, prevent submission and show alert
+            if (!file) {
+                e.preventDefault(); // Prevent form submission
+                Swal.fire({
+                    icon: 'error',
+                    title: 'No File Selected',
+                    text: 'Please select a file before submitting.',
+                    showConfirmButton: true,
+                    allowOutsideClick: false,
+                    allowEscapeKey: true,
+                });
+                return false; // Stop further execution
+            }
+        });
+    });
+
+      // Function to show error message with SweetAlert2
+    function showErrorMessage(message) {
+        Swal.fire({
+            icon: 'error',
+            title: 'Error',
+            text: message,
+            showConfirmButton: true,
+            allowOutsideClick: false,
+            allowEscapeKey: true,
+        });
+    }
+
+    // Show error message if ViewData["Error"] exists
+    @if (ViewData["Error"] != null)
+    {
+        <text>
+            showErrorMessage('@ViewData["Error"]');
+        </text>
+    }
+
+     // Function to show success message 
+    function showSuccessMessage(message) {
+        Swal.fire({
+            icon: 'success',
+            title: 'Success',
+            text: message,
+            showConfirmButton: true,
+            allowOutsideClick: false,
+            allowEscapeKey: true,
+        });
+    }
+
+    // Show success message if ViewData["Success"] exists
+    @if (ViewData["Success"] != null)
+    {
+        <text>
+            showSuccessMessage('@ViewData["Success"]');
+        </text>
+    }
+
+    // Handle form submission for Tab 1
+    document.addEventListener('DOMContentLoaded', function () {
+    const formUploadData = document.querySelector('#upload-data form');
+    const loadingIndicator = document.getElementById('loadingIndicator');
+
+    formUploadData.addEventListener('submit', function () {
+        // Check if a file is selected before showing the loading indicator
+        const fileInput = formUploadData.querySelector('input[type="file"]');
+        const file = fileInput?.files[0];
+
+        if (file) {
+            loadingIndicator.style.display = 'block'; // Show the loading indicator if file is selected
+        }
+    });
+
+    // Handle form submission for Tab 2
+    const formMasterData = document.querySelector('#master-data form');
+    const loadingIndicatorMaster = document.getElementById('loadingIndicatorMaster');
+
+    formMasterData.addEventListener('submit', function () {
+        // Check if a file is selected before showing the loading indicator
+        const fileInput = formMasterData.querySelector('input[type="file"]');
+        const file = fileInput?.files[0];
+
+        if (file) {
+            loadingIndicatorMaster.style.display = 'block'; // Show the loading indicator if file is selected
+        }
+    });
+
+    // Disable the tab
+    @* document.getElementById('tab-master-data').setAttribute('disabled', true);
+    document.getElementById('tab-master-data').classList.add('disabled'); *@
+
+    // Enable the tab (ถ้าต้องการในอนาคต)
+    document.getElementById('tab-master-data').removeAttribute('disabled');
+    document.getElementById('tab-master-data').classList.remove('disabled');
+});
+</script>
+
+</body>
+</html>

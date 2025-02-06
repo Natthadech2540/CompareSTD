@@ -1,0 +1,80 @@
+html {
+  font-size: 14px;
+  position: relative;
+  min-height: 100%; /* Ensures footer stays at the bottom */
+}
+
+body {
+  margin-bottom: 60px; /* Space for footer */
+}
+
+header {
+  padding: 10px 0;
+  font-size: 14px; /* Default for smaller screens */
+}
+
+/* Responsive adjustments for small screens */
+@media (max-width: 590px) {
+  .navbar .container-fluid {
+    flex-direction: column; /* Stack navbar elements */
+    align-items: center; /* Center items */
+  }
+
+  .navbar-brand {
+    margin-bottom: 10px;
+    font-size: 1.5rem; /* Smaller font for branding */
+  }
+
+  .navbar-toggler {
+    margin: 0; /* Reset margin for better alignment */
+  }
+}
+
+/* Responsive adjustments for medium screens */
+@media (max-width: 768px) {
+  .navbar-brand {
+    font-size: 16px; /* Slightly larger branding for medium screens */
+  }
+
+  .navbar-toggler {
+    margin-right: 10px; /* Space for toggler */
+  }
+}
+
+@media (min-width: 768px) {
+  html {
+    font-size: 16px; /* Increase font size for larger screens */
+  }
+}
+
+/* Animations */
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes bounceIn {
+  0% {
+    right: -300px;
+    opacity: 0;
+  }
+  60% {
+    right: 20px;
+  }
+  100% {
+    right: 0;
+  }
+}
+
+/* Focus styles for buttons and inputs */
+.btn:focus,
+.btn:active:focus,
+.btn-link.nav-link:focus,
+.form-control:focus,
+.form-check-input:focus {
+  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
+}

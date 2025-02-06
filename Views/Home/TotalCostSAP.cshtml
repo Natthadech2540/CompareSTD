@@ -1,0 +1,188 @@
+﻿@model IEnumerable<TemplateSTD.Models.STD.TotalCostSap>
+
+@{
+    ViewData["Title"] = "TotalCostSap";
+}
+<style>
+    .styled-title {
+        border: 2px solid #4CAF50; /* กรอบสีเขียว */
+        border-radius: 10px; /* มุมโค้งมน */
+        background-color: #f9f9f9; /* พื้นหลังสีอ่อน */
+        padding: 15px; /* ระยะห่างภายใน */
+        text-align: center; /* จัดข้อความกึ่งกลาง */
+        font-size: 24px; /* ขนาดตัวอักษร */
+        font-weight: bold; /* ตัวหนา */
+        color: #333; /* สีข้อความ */
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* เงา */
+        margin-bottom: 20px; /* ระยะห่างด้านล่าง */
+    }
+
+        /* ตกแต่ง thead */
+        thead th {
+            background-color: #007B80; /* สีพื้นหลัง */
+            color: white; /* สีข้อความ */
+            text-align: center;
+            font-weight: bold;
+            padding: 8px;
+            border: 1px solid #ddd;
+        }
+
+         /* Preload Modal */
+    .preload-modal {
+        display: flex; /* ใช้ Flexbox เพื่อจัดกึ่งกลาง */
+        align-items: center;
+        justify-content: center;
+        position: fixed;
+        z-index: 9999;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.6); /* สีพื้นหลังโปร่ง */
+    }
+
+    .preload-content {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 20px;
+        border: 3px solid #007B80; /* กรอบสีเขียว */
+        border-radius: 15px; /* มุมโค้งมน */
+        background-color: #fff; /* พื้นหลังสีขาว */
+        box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2); /* เงา */
+        text-align: center;
+        color: #333; /* สีข้อความ */
+        font-size: 1.2rem;
+    }
+
+    /* Spinner */
+    .spinner {
+        width: 50px;
+        height: 50px;
+        margin-bottom: 15px;
+        border: 6px solid #ddd; /* สีพื้นของวงกลม */
+        border-top: 6px solid #007B80; /* สีของวงกลมที่หมุน */
+        border-radius: 50%;
+        animation: spin 1s linear infinite;
+    }
+</style>
+
+<!-- Preload Modal -->
+<div id="preloadModal" class="preload-modal">
+    <div class="preload-content">
+        <div class="spinner"></div>
+        <p>Loading... Please wait.</p>
+    </div>
+</div>
+
+<h2 class="styled-title">@ViewData["Title"]</h2>
+
+<link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css" />
+<link rel="stylesheet" href="https://cdn.datatables.net/buttons/2.4.1/css/buttons.dataTables.min.css" />
+
+<table id="dataTable" class="display nowrap" style="width:100%">
+    <thead>
+        <tr>
+            <th>SAPFiscalYear</th>
+            <th>SAPModel</th>
+            <th>SAPMaterialCost</th>
+            <th>SAPProcessCost</th>
+            <th>SAPOhcost</th>
+            <th>SAPSrvpackingpercent</th>
+            <th>SAPSrvpackingCost</th>
+            <th>SAPTotalStdcost</th>
+            <th>SAPTotalStdcostRound</th>
+            <th>SAPUnit</th>
+            <th>SAPPriceperunit</th>
+            <th>SAPTotalTs</th>
+            <th>SAPTsunit</th>
+        </tr>
+        <tr>
+            <th><input type="text" placeholder="Search SAPFiscalYear" /></th>
+            <th><input type="text" placeholder="Search SAPModel" /></th>
+            <th><input type="text" placeholder="Search SAPMaterialCost" /></th>
+            <th><input type="text" placeholder="Search SAPProcessCost" /></th>
+            <th><input type="text" placeholder="Search SAPOhcost" /></th>
+            <th><input type="text" placeholder="Search SAPSrvpackingpercent" /></th>
+            <th><input type="text" placeholder="Search SAPSrvpackingCost" /></th>
+            <th><input type="text" placeholder="Search SAPTotalStdcost" /></th>
+            <th><input type="text" placeholder="Search SAPTotalStdcostRound" /></th>
+            <th><input type="text" placeholder="Search SAPUnit" /></th>
+            <th><input type="text" placeholder="Search SAPPriceperunit" /></th>
+            <th><input type="text" placeholder="Search SAPTotalTs" /></th>
+            <th><input type="text" placeholder="Search SAPTsunit" /></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.FiscalYear</td>
+                <td>@item.Model</td>
+                <td>@item.MaterialCost</td>
+                <td>@item.ProcessCost</td>
+                <td>@item.Ohcost</td>
+                <td>@item.Srvpackingpercent</td>
+                <td>@item.SrvpackingCost</td>
+                <td>@item.TotalStdcost</td>
+                <td>@item.TotalStdcostRound</td>
+                <td>@item.Unit</td>
+                <td>@item.Priceperunit</td>
+                <td>@item.TotalTs</td>
+                <td>@item.Tsunit</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        // แสดง Preload Modal
+        var preloadModal = document.getElementById("preloadModal");
+        preloadModal.style.display = "flex";
+
+        $('#dataTable').DataTable({
+            dom: '<"top"fBlp>rt<"bottom"i><"clear">', // 'f' เป็นส่วนของ search box
+            buttons: [
+                {
+                    extend: 'copy',
+                },
+                {
+                    extend: 'csv',
+                    title: 'TotalCostSap' // เปลี่ยนชื่อไฟล์ CSV ที่ส่งออก
+                },
+                {
+                    extend: 'excel',
+                    title: 'TotalCostSap' // เปลี่ยนชื่อไฟล์ Excel ที่ส่งออก
+                },
+                {
+                    extend: 'colvis', // เพิ่มปุ่ม ColVis ที่ใช้สำหรับการซ่อน/แสดงคอลัมน์
+                    text: 'Show/Hide Columns' // เปลี่ยนข้อความปุ่มถ้าต้องการ
+                }
+            ],
+            scrollX: true,
+            orderCellsTop: true,
+            searching: true,
+            pageLength: 5, // Default to showing 5 records
+            lengthMenu: [[5, 10, 25, 50, 100, -1], [5, 10, 25, 50, 100, 'ALL']],
+            initComplete: function () {
+                // ซ่อน Preload Modal เมื่อโหลดเสร็จ
+                preloadModal.style.display = "none";
+            },
+            initComplete: function () {
+                // ซ่อน Preload Modal เมื่อโหลดเสร็จ
+                preloadModal.style.display = "none";
+
+                // ใช้แถวที่ 2 ของ thead สำหรับ input
+                var api = this.api();
+                $(api.table().header()).find('tr').eq(1).find('input').each(function (index) {
+                    $(this).on('keyup change clear', function () {
+                        if (api.column(index).search() !== this.value) {
+                            api.column(index).search(this.value).draw();
+                        }
+                    });
+                });
+            }
+        });
+    });
+</script>

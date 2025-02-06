@@ -1,0 +1,268 @@
+﻿@model IEnumerable<TemplateSTD.Models.STD.CostBomAs400>
+
+@{
+    ViewData["Title"] = "CostBomAs400";
+}
+<style>
+    .styled-title {
+        border: 2px solid #4CAF50; /* กรอบสีเขียว */
+        border-radius: 10px; /* มุมโค้งมน */
+        background-color: #f9f9f9; /* พื้นหลังสีอ่อน */
+        padding: 15px; /* ระยะห่างภายใน */
+        text-align: center; /* จัดข้อความกึ่งกลาง */
+        font-size: 24px; /* ขนาดตัวอักษร */
+        font-weight: bold; /* ตัวหนา */
+        color: #333; /* สีข้อความ */
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* เงา */
+        margin-bottom: 20px; /* ระยะห่างด้านล่าง */
+    }
+
+     /* ตกแต่ง thead */
+        thead th {
+            background-color: #007B80; /* สีพื้นหลัง */
+            color: white; /* สีข้อความ */
+            text-align: center;
+            font-weight: bold;
+            padding: 8px;
+            border: 1px solid #ddd;
+        }
+
+        /* Preload Modal */
+    .preload-modal {
+        display: flex; /* ใช้ Flexbox เพื่อจัดกึ่งกลาง */
+        align-items: center;
+        justify-content: center;
+        position: fixed;
+        z-index: 9999;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.6); /* สีพื้นหลังโปร่ง */
+    }
+
+    .preload-content {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 20px;
+        border: 3px solid #007B80; /* กรอบสีเขียว */
+        border-radius: 15px; /* มุมโค้งมน */
+        background-color: #fff; /* พื้นหลังสีขาว */
+        box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2); /* เงา */
+        text-align: center;
+        color: #333; /* สีข้อความ */
+        font-size: 1.2rem;
+    }
+
+    /* Spinner */
+    .spinner {
+        width: 50px;
+        height: 50px;
+        margin-bottom: 15px;
+        border: 6px solid #ddd; /* สีพื้นของวงกลม */
+        border-top: 6px solid #007B80; /* สีของวงกลมที่หมุน */
+        border-radius: 50%;
+        animation: spin 1s linear infinite;
+    }
+</style>
+
+<!-- Preload Modal -->
+<div id="preloadModal" class="preload-modal">
+    <div class="preload-content">
+        <div class="spinner"></div>
+        <p>Loading... Please wait.</p>
+    </div>
+</div>
+
+<h2 class="styled-title">@ViewData["Title"]</h2>
+
+<link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css" />
+<link rel="stylesheet" href="https://cdn.datatables.net/buttons/2.4.1/css/buttons.dataTables.min.css" />
+
+<table id="dataTable" class="display nowrap" style="width:100%">
+    <thead>
+        <tr>
+            <th>Model</th>
+            <th>Plant</th>
+            <th>CostingRun</th>
+            <th>CostingRundt</th>
+            <th>RunningNo</th>
+            <th>Lv</th>
+            <th>ParentMat</th>
+            <th>ParentMatDesc</th>
+            <th>ParentProcTypeMm</th>
+            <th>ParentSpTypeMm</th>
+            <th>Component</th>
+            <th>ComponentDesc</th>
+            <th>ItemType</th>
+            <th>CompProcTypeMm</th>
+            <th>CompSpTypeMm</th>
+            <th>CompSpTypeBom</th>
+            <th>BulkMat</th>
+            <th>CostRelevancyBom</th>
+            <th>PhantomItem</th>
+            <th>DeletionIndicator</th>
+            <th>MatProvisionIndicator</th>
+            <th>CompEffectDtFrom</th>
+            <th>CompEffectDtTo</th>
+            <th>Unit</th>
+            <th>MSize</th>
+            <th>QuantityModel</th>
+            <th>Scrap</th>
+            <th>TotalScrap</th>
+            <th>TotalQuantity</th>
+            <th>QuantityUnit</th>
+            <th>Import</th>
+            <th>TaxExp</th>
+            <th>Local</th>
+            <th>StdPrice</th>
+            <th>PriceQtyUnit</th>
+            <th>NoPrice</th>
+            <th>NoCost</th>
+            <th>SumValue</th>
+            <th>SumTotalValue</th>
+            <th>PurPriceCur</th>
+            <th>ItemClass</th>
+        </tr>
+        <tr>
+            <th><input type="text" placeholder="Search Model" /></th>
+            <th><input type="text" placeholder="Search Plant" /></th>
+            <th><input type="text" placeholder="Search CostingRun" /></th>
+            <th><input type="text" placeholder="Search CostingRundt" /></th>
+            <th><input type="text" placeholder="Search RunningNo" /></th>
+            <th><input type="text" placeholder="Search Lv" /></th>
+            <th><input type="text" placeholder="Search ParentMat" /></th>
+            <th><input type="text" placeholder="Search ParentMatDesc" /></th>
+            <th><input type="text" placeholder="Search ParentProcTypeMm" /></th>
+            <th><input type="text" placeholder="Search ParentSpTypeMm" /></th>
+            <th><input type="text" placeholder="Search Component" /></th>
+            <th><input type="text" placeholder="Search ComponentDesc" /></th>
+            <th><input type="text" placeholder="Search ItemType" /></th>
+            <th><input type="text" placeholder="Search CompProcTypeMm" /></th>
+            <th><input type="text" placeholder="Search CompSpTypeMm" /></th>
+            <th><input type="text" placeholder="Search CompSpTypeBom" /></th>
+            <th><input type="text" placeholder="Search BulkMat" /></th>
+            <th><input type="text" placeholder="Search CostRelevancyBom" /></th>
+            <th><input type="text" placeholder="Search PhantomItem" /></th>
+            <th><input type="text" placeholder="Search DeletionIndicator" /></th>
+            <th><input type="text" placeholder="Search MatProvisionIndicator" /></th>
+            <th><input type="text" placeholder="Search CompEffectDtFrom" /></th>
+            <th><input type="text" placeholder="Search CompEffectDtTo" /></th>
+            <th><input type="text" placeholder="Search Unit" /></th>
+            <th><input type="text" placeholder="Search MSize" /></th>
+            <th><input type="text" placeholder="Search QuantityModel" /></th>
+            <th><input type="text" placeholder="Search Scrap" /></th>
+            <th><input type="text" placeholder="Search TotalScrap" /></th>
+            <th><input type="text" placeholder="Search TotalQuantity" /></th>
+            <th><input type="text" placeholder="Search QuantityUnit" /></th>
+            <th><input type="text" placeholder="Search Import" /></th>
+            <th><input type="text" placeholder="Search TaxExp" /></th>
+            <th><input type="text" placeholder="Search Local" /></th>
+            <th><input type="text" placeholder="Search StdPrice" /></th>
+            <th><input type="text" placeholder="Search PriceQtyUnit" /></th>
+            <th><input type="text" placeholder="Search NoPrice" /></th>
+            <th><input type="text" placeholder="Search NoCost" /></th>
+            <th><input type="text" placeholder="Search SumValue" /></th>
+            <th><input type="text" placeholder="Search SumTotalValue" /></th>
+            <th><input type="text" placeholder="Search PurPriceCur" /></th>
+            <th><input type="text" placeholder="Search ItemClass" /></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.Model</td>
+                <td>@item.Plant</td>
+                <td>@item.CostingRun</td>
+                <td>@item.CostingRundt</td>
+                <td>@item.RunningNo</td>
+                <td>@item.Lv</td>
+                <td>@item.ParentMat</td>
+                <td>@item.ParentMatDesc</td>
+                <td>@item.ParentProcTypeMm</td>
+                <td>@item.ParentSpTypeMm</td>
+                <td>@item.Component</td>
+                <td>@item.ComponentDesc</td>
+                <td>@item.ItemType</td>
+                <td>@item.CompProcTypeMm</td>
+                <td>@item.CompSpTypeMm</td>
+                <td>@item.CompSpTypeBom</td>
+                <td>@item.BulkMat</td>
+                <td>@item.CostRelevancyBom</td>
+                <td>@item.PhantomItem</td>
+                <td>@item.DeletionIndicator</td>
+                <td>@item.MatProvisionIndicator</td>
+                <td>@item.CompEffectDtFrom</td>
+                <td>@item.CompEffectDtTo</td>
+                <td>@item.Unit</td>
+                <td>@item.MSize</td>
+                <td>@item.QuantityModel</td>
+                <td>@item.Scrap</td>
+                <td>@item.TotalScrap</td>
+                <td>@item.TotalQuantity</td>
+                <td>@item.QuantityUnit</td>
+                <td>@item.Import</td>
+                <td>@item.TaxExp</td>
+                <td>@item.Local</td>
+                <td>@item.StdPrice</td>
+                <td>@item.PriceQtyUnit</td>
+                <td>@item.NoPrice</td>
+                <td>@item.NoCost</td>
+                <td>@item.SumValue</td>
+                <td>@item.SumTotalValue</td>
+                <td>@item.PurPriceCur</td>
+                <td>@item.ItemClass</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+    <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/2.4.1/js/dataTables.buttons.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/2.4.1/js/buttons.html5.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        // แสดง Preload Modal
+        var preloadModal = document.getElementById("preloadModal");
+        preloadModal.style.display = "flex";
+
+        // Initialize DataTable
+        $('#dataTable').DataTable({
+            dom: '<"top"fBlp>rt<"bottom"i><"clear">', // 'f' เป็นส่วนของ search box
+            buttons: [
+                'copy', 'csv', 'excel'
+            ],
+            scrollX: true,
+            orderCellsTop: true,
+            searching: true,
+            pageLength: 5, // Default to showing 5 records
+            lengthMenu: [[5, 10, 25, 50, 100, -1], [5, 10, 25, 50, 100, 'ALL']],
+            initComplete: function () {
+                // ซ่อน Preload Modal เมื่อโหลดเสร็จ
+                preloadModal.style.display = "none";
+            },
+            initComplete: function () {
+                // ซ่อน Preload Modal เมื่อโหลดเสร็จ
+                preloadModal.style.display = "none";
+
+                // ใช้แถวที่ 2 ของ thead สำหรับ input
+                var api = this.api();
+                $(api.table().header()).find('tr').eq(1).find('input').each(function (index) {
+                    $(this).on('keyup change clear', function () {
+                        if (api.column(index).search() !== this.value) {
+                            api.column(index).search(this.value).draw();
+                        }
+                    });
+                });
+            }
+        });
+    });
+</script>
+
+
+
+

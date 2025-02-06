@@ -1,0 +1,321 @@
+﻿@model IEnumerable<TemplateSTD.Models.STD.CompareOhcost>
+
+@{
+    ViewData["Title"] = "TemplateOHCost";
+}
+<style>
+    .styled-title {
+        border: 2px solid #4CAF50; /* กรอบสีเขียว */
+        border-radius: 10px; /* มุมโค้งมน */
+        background-color: #f9f9f9; /* พื้นหลังสีอ่อน */
+        padding: 15px; /* ระยะห่างภายใน */
+        text-align: center; /* จัดข้อความกึ่งกลาง */
+        font-size: 24px; /* ขนาดตัวอักษร */
+        font-weight: bold; /* ตัวหนา */
+        color: #333; /* สีข้อความ */
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* เงา */
+        margin-bottom: 20px; /* ระยะห่างด้านล่าง */
+    }
+
+
+        /* ตกแต่ง thead */
+        thead th {
+            background-color: #007B80; /* สีพื้นหลัง */
+            color: white; /* สีข้อความ */
+            text-align: center;
+            font-weight: bold;
+            padding: 8px;
+            border: 1px solid #ddd;
+        }
+
+        /* เพิ่มเส้นขอบให้ input */
+        thead input {
+            width: 90%;
+            padding: 4px;
+            margin: 2px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        /* สลับสีแถวใน tbody */
+        tbody tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        tbody tr:hover {
+            background-color: #ddd; /* เปลี่ยนสีเมื่อ hover */
+        }
+
+        /* เส้นขอบสำหรับตาราง */
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+        }
+</style>
+
+@* <h2 class="styled-title">@ViewData["Title"]</h2> *@
+<h2 class="styled-title">Template Compare Process & OH Cost</h2>
+
+
+<link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css" />
+<link rel="stylesheet" href="https://cdn.datatables.net/buttons/2.4.1/css/buttons.dataTables.min.css" />
+
+<table id="dataTable" class="display nowrap" style="width:100%">
+    <thead>
+        <!-- Header สำหรับส่วนหลัก -->
+        <tr>
+            <th colspan="13" style="text-align: center; font-weight: bold; border: 1px solid black;font-size: 1.5rem;font-weight: bold;">SAP</th>
+            <th colspan="13" style="text-align: center; font-weight: bold; border: 1px solid black;font-size: 1.5rem;font-weight: bold;">AS400</th>
+            <th colspan="6" style="text-align: center; font-weight: bold; border: 1px solid black;font-size: 1.5rem;font-weight: bold;">Amount DIFF (AS400-SAP)</th>
+            <th colspan="6" style="text-align: center; font-weight: bold; border: 1px solid black;font-size: 1.5rem;font-weight: bold;">% DIFF (Amount diff/AS400)</th>
+            <th style="text-align: center; font-weight: bold; border: 1px solid black;font-size: 1.5rem;font-weight: bold;">Reason</th>
+        </tr>
+       <tr>
+            <th>SapModel</th>
+            <th>SapPlant</th>
+            <th>SapFiscalYear</th>
+            <th>SapCostCenter</th>
+            <th>SapTsQuantity</th>
+            <th>SapUnitQuantity</th>
+            <th>SapPricePerUnit</th>
+            <th>SapPriceQtyUnit</th>
+            <th>SapCostRate</th>
+            <th>SapOhCostRate</th>
+            <th>SapTotalProcessCostVal</th>
+            <th>SapTotalOhVal</th>
+            <th>SapTotalCostVal</th>
+            <th>As400Model</th>
+            <th>As400Plant</th>
+            <th>As400FiscalYear</th>
+            <th>As400CostCenter</th>
+            <th>As400TsQuantity</th>
+            <th>As400UnitQuantity</th>
+            <th>As400PricePerUnit</th>
+            <th>As400PriceQtyUnit</th>
+            <th>As400CostRate</th>
+            <th>As400OhCostRate</th>
+            <th>As400TotalProcessCostVal</th>
+            <th>As400TotalOhCostVal</th>
+            <th>As400TotalCostVal</th>
+            <th>DiffTsQuantity</th>
+            <th>DiffProcessCostRate</th>
+            <th>DiffOhCostRate</th>
+            <th>DiffTotalProcessCostVal</th>
+            <th>DiffTotalOhCostVal</th>
+            <th>DiffTotalCostVal</th>
+            <th>PercentDiffTsQuantity</th>
+            <th>PercentDiffProcessCostRate</th>
+            <th>PercentDiffOhCostRate</th>
+            <th>PercentDiffTotalProcessCostVal</th>
+            <th>PercentDiffTotalOhCostVal</th>
+            <th>PercentDiffTotalCostVal</th>
+            <th>Reason</th>
+        </tr>
+        <tr>
+            <th><input type="text" placeholder="Search SapModel" /></th>
+            <th><input type="text" placeholder="Search SapPlant" /></th>
+            <th><input type="text" placeholder="Search SapFiscalYear" /></th>
+            <th><input type="text" placeholder="Search SapCostCenter" /></th>
+            <th><input type="text" placeholder="Search SapTsQuantity" /></th>
+            <th><input type="text" placeholder="Search SapUnitQuantity" /></th>
+            <th><input type="text" placeholder="Search SapPricePerUnit" /></th>
+            <th><input type="text" placeholder="Search SapPriceQtyUnit" /></th>
+            <th><input type="text" placeholder="Search SapCostRate" /></th>
+            <th><input type="text" placeholder="Search SapOhCostRate" /></th>
+            <th><input type="text" placeholder="Search SapTotalProcessCostVal" /></th>
+            <th><input type="text" placeholder="Search SapTotalOhVal" /></th>
+            <th><input type="text" placeholder="Search SapTotalCostVal" /></th>
+            <th><input type="text" placeholder="Search As400Model" /></th>
+            <th><input type="text" placeholder="Search As400Plant" /></th>
+            <th><input type="text" placeholder="Search As400FiscalYear" /></th>
+            <th><input type="text" placeholder="Search As400CostCenter" /></th>
+            <th><input type="text" placeholder="Search As400TsQuantity" /></th>
+            <th><input type="text" placeholder="Search As400UnitQuantity" /></th>
+            <th><input type="text" placeholder="Search As400PricePerUnit" /></th>
+            <th><input type="text" placeholder="Search As400PriceQtyUnit" /></th>
+            <th><input type="text" placeholder="Search As400CostRate" /></th>
+            <th><input type="text" placeholder="Search As400OhCostRate" /></th>
+            <th><input type="text" placeholder="Search As400TotalProcessCostVal" /></th>
+            <th><input type="text" placeholder="Search As400TotalOhCostVal" /></th>
+            <th><input type="text" placeholder="Search As400TotalCostVal" /></th>
+            <th><input type="text" placeholder="Search DiffTsQuantity" /></th>
+            <th><input type="text" placeholder="Search DiffProcessCostRate" /></th>
+            <th><input type="text" placeholder="Search DiffOhCostRate" /></th>
+            <th><input type="text" placeholder="Search DiffTotalProcessCostVal" /></th>
+            <th><input type="text" placeholder="Search DiffTotalOhCostVal" /></th>
+            <th><input type="text" placeholder="Search DiffTotalCostVal" /></th>
+            <th><input type="text" placeholder="Search PercentDiffTsQuantity" /></th>
+            <th><input type="text" placeholder="Search PercentDiffProcessCostRate" /></th>
+            <th><input type="text" placeholder="Search PercentDiffOhCostRate" /></th>
+            <th><input type="text" placeholder="Search PercentDiffTotalProcessCostVal" /></th>
+            <th><input type="text" placeholder="Search PercentDiffTotalOhCostVal" /></th>
+            <th><input type="text" placeholder="Search PercentDiffTotalCostVal" /></th>
+            <th><input type="text" placeholder="Search Reason" /></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.SapModel</td>
+                <td>@item.SapPlant</td>
+                <td>@item.SapFiscalYear</td>
+                <td>@item.SapCostCenter</td>
+                <td>@item.SapTsQuantity</td>
+                <td>@item.SapUnitQuantity</td>
+                <td>@item.SapPricePerUnit</td>
+                <td>@item.SapPriceQtyUnit</td>
+                <td>@item.SapCostRate</td>
+                <td>@item.SapOhCostRate</td>
+                <td>@item.SapTotalProcessCost</td>
+                <td>@item.SapTotalOh</td>
+                <td>@item.SapTotalValue</td>
+                <td>@item.As400Model</td>
+                <td>@item.As400Plant</td>
+                <td>@item.As400FiscalYear</td>
+                <td>@item.As400CostCenter</td>
+                <td>@item.As400TsQuantity</td>
+                <td>@item.As400UnitQuantity</td>
+                <td>@item.As400PricePerUnit</td>
+                <td>@item.As400PriceQtyUnit</td>
+                <td>@item.As400CostRate</td>
+                <td>@item.As400OhCostRate</td>
+                <td>@item.As400TotalProcessCost</td>
+                <td>@item.As400TotalOh</td>
+                <td>@item.As400TotalValue</td>
+                <td>@item.DiffTsQuantity</td>
+                <td>@item.DiffProcessCostRate</td>
+                <td>@item.DiffOhCostRate</td>
+                <td>@item.DiffTotalProcessCost</td>
+                <td>@item.DiffTotalOh</td>
+                <td>@item.DiffTotalValue</td>
+                <td>@item.PercentDiffTsQuantity</td>
+                <td>@item.PercentDiffProcessCostRate</td>
+                <td>@item.PercentDiffOhCostRate</td>
+                <td>@item.PercentDiffTotalProcessCost</td>
+                <td>@item.PercentDiffTotalOh</td>
+                <td>@item.PercentDiffTotalValue</td>
+                @* Case-based formatting for specific conditions *@
+                <td style="font-weight: bold; font-size: 20px; text-align: center; 
+                        color: @(item.PercentDiffTsQuantity?.ToString() == "0.00%" ? "green" : "red");">
+                    @if (@item.PercentDiffTsQuantity?.ToString() == "0.00%")
+                    {
+                        @:No value dif
+                    }
+                    else if (@item.DiffProcessCostRate?.ToString() != "0.000" && 
+                            @item.DiffTsQuantity?.ToString() == "0.000" || 
+                            @item.DiffOhCostRate?.ToString() != "0.000" && 
+                            @item.DiffTsQuantity?.ToString() == "0.000")
+                    {
+                        @:Diff rate
+                    }
+                    else if (@item.DiffTsQuantity?.ToString() != "0.000" && 
+                            @item.DiffProcessCostRate?.ToString() == "0.000" && 
+                            @item.DiffOhCostRate?.ToString() == "0.000")
+                    {
+                        @:Diff quantity
+                    }
+                    else if (@item.DiffTsQuantity?.ToString() != "0.000" && 
+                            @item.DiffProcessCostRate?.ToString() != "0.000" && 
+                            @item.DiffOhCostRate?.ToString() != "0.000")
+                    {
+                        @:Diff rate & diff quantity
+                    }
+                    else if (@item.As400Model?.ToString()     == null && 
+                            @item.As400Plant?.ToString()      == null && 
+                            @item.As400FiscalYear?.ToString() == null &&
+                            @item.As400CostCenter?.ToString() == null)
+                    {
+                        @:Z1 Key exists in SAP but not in AS400
+                    }
+                    else if (@item.SapModel?.ToString()     == null && 
+                            @item.SapPlant?.ToString()      == null && 
+                            @item.SapFiscalYear?.ToString() == null &&
+                            @item.SapCostCenter?.ToString() == null)
+                    {
+                        @:Z2 Key exists in AS400 but not in SAP
+                    }
+                    else
+                    {
+                        @item.Reason
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+    <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/2.4.1/js/dataTables.buttons.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/2.4.1/js/buttons.html5.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        // Show loading alert immediately when page loads
+        Swal.fire({
+            title: 'Loading...',
+            html: 'Please wait while the data is being loaded.',
+            icon: 'info',
+            allowOutsideClick: false,
+            didOpen: () => {
+                Swal.showLoading();
+            }
+        });
+
+        var table = $('#dataTable').DataTable({
+            dom: '<"top"fBlp>rt<"bottom"i><"clear">',
+            orderCellsTop: true, // ใช้แถวแรกของ thead สำหรับจัดเรียงและการ Export
+            buttons: [
+                {
+                    extend: 'copy',
+                    text: 'Copy',
+                    exportOptions: {
+                        columns: ':visible',
+                        header: true, // รวม Header
+                    }
+                },
+                {
+                    extend: 'csv',
+                    text: 'CSV',
+                    exportOptions: {
+                        columns: ':visible',
+                        header: true,
+                    }
+                },
+                {
+                    extend: 'excel',
+                    text: 'Excel',
+                    exportOptions: {
+                        columns: ':visible',
+                        header: true,
+                    }
+                }
+            ],
+            scrollX: true,
+            search:true,
+            pageLength: 5,
+            lengthMenu: [[5, 10, 25, 50, 100, -1], [5, 10, 25, 50, 100, 'ALL']],
+            initComplete: function () {
+                Swal.close(); // Close the loading alert
+
+                // ใช้แถวที่ 2 ของ thead สำหรับ input
+                var api = this.api();
+                $(api.table().header()).find('tr').eq(2).find('input').each(function (index) {
+                    $(this).on('keyup change clear', function () {
+                        if (api.column(index).search() !== this.value) {
+                            api.column(index).search(this.value).draw();
+                        }
+                    });
+                });
+            }
+        });
+
+    });
+</script>
+
+
+
+
+

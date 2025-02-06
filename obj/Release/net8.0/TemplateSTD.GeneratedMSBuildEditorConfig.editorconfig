@@ -1,0 +1,103 @@
+is_global = true
+build_property.TargetFramework = net8.0
+build_property.TargetPlatformMinVersion = 
+build_property.UsingMicrosoftNETSdkWeb = true
+build_property.ProjectTypeGuids = 
+build_property.InvariantGlobalization = 
+build_property.PlatformNeutralAssembly = 
+build_property.EnforceExtendedAnalyzerRules = 
+build_property._SupportedPlatformList = Linux,macOS,Windows
+build_property.RootNamespace = TemplateSTD
+build_property.RootNamespace = TemplateSTD
+build_property.ProjectDir = C:\project\C#NET\TemplateSTD\
+build_property.EnableComHosting = 
+build_property.EnableGeneratedComInterfaceComImportInterop = 
+build_property.RazorLangVersion = 8.0
+build_property.SupportLocalizedComponentNames = 
+build_property.GenerateRazorMetadataSourceChecksumAttributes = 
+build_property.MSBuildProjectDirectory = C:\project\C#NET\TemplateSTD
+build_property._RazorSourceGeneratorDebug = 
+
+[C:/project/C\#NET/TemplateSTD/Views/Home/CostBomAs400.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxDb3N0Qm9tQXM0MDAuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/project/C\#NET/TemplateSTD/Views/Home/CostBomSAP.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxDb3N0Qm9tU0FQLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/project/C\#NET/TemplateSTD/Views/Home/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/project/C\#NET/TemplateSTD/Views/Home/LogUpload.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxMb2dVcGxvYWQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/project/C\#NET/TemplateSTD/Views/Home/MasterMaterialBasic.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxNYXN0ZXJNYXRlcmlhbEJhc2ljLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/project/C\#NET/TemplateSTD/Views/Home/MasterMaterialUnit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxNYXN0ZXJNYXRlcmlhbFVuaXQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/project/C\#NET/TemplateSTD/Views/Home/MasterShopmapCostCenter.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxNYXN0ZXJTaG9wbWFwQ29zdENlbnRlci5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/project/C\#NET/TemplateSTD/Views/Home/Privacy.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxQcml2YWN5LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/project/C\#NET/TemplateSTD/Views/Home/ProcessOhcostAs400.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxQcm9jZXNzT2hjb3N0QXM0MDAuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/project/C\#NET/TemplateSTD/Views/Home/ProcessOhcostSap.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxQcm9jZXNzT2hjb3N0U2FwLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/project/C\#NET/TemplateSTD/Views/Home/TemplateCompareCostBom.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxUZW1wbGF0ZUNvbXBhcmVDb3N0Qm9tLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/project/C\#NET/TemplateSTD/Views/Home/TemplateOHCost.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxUZW1wbGF0ZU9IQ29zdC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/project/C\#NET/TemplateSTD/Views/Home/TemplateTotalSTDCostBom.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxUZW1wbGF0ZVRvdGFsU1REQ29zdEJvbS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/project/C\#NET/TemplateSTD/Views/Home/TotalCostAS400.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxUb3RhbENvc3RBUzQwMC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/project/C\#NET/TemplateSTD/Views/Home/TotalCostSAP.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxUb3RhbENvc3RTQVAuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/project/C\#NET/TemplateSTD/Views/Home/UploadDB.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxVcGxvYWREQi5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/project/C\#NET/TemplateSTD/Views/Shared/Error.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXEVycm9yLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/project/C\#NET/TemplateSTD/Views/Shared/_ValidationScriptsPartial.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/project/C\#NET/TemplateSTD/Views/_ViewImports.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdJbXBvcnRzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/project/C\#NET/TemplateSTD/Views/_ViewStart.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdTdGFydC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/project/C\#NET/TemplateSTD/Views/Shared/_Layout.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9MYXlvdXQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = b-8px8tg9mp2

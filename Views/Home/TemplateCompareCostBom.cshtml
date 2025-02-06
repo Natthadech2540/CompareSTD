@@ -1,0 +1,398 @@
+﻿@model IEnumerable<TemplateSTD.Models.STD.CompareCostBom>
+
+@{
+    ViewData["Title"] = "TemplateCompareCostBom";
+}
+<style>
+    .styled-title {
+        border: 2px solid #4CAF50; /* กรอบสีเขียว */
+        border-radius: 10px; /* มุมโค้งมน */
+        background-color: #f9f9f9; /* พื้นหลังสีอ่อน */
+        padding: 15px; /* ระยะห่างภายใน */
+        text-align: center; /* จัดข้อความกึ่งกลาง */
+        font-size: 24px; /* ขนาดตัวอักษร */
+        font-weight: bold; /* ตัวหนา */
+        color: #333; /* สีข้อความ */
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* เงา */
+        margin-bottom: 20px; /* ระยะห่างด้านล่าง */
+    }
+
+
+        /* ตกแต่ง thead */
+        thead th {
+            background-color: #007B80; /* สีพื้นหลัง */
+            color: white; /* สีข้อความ */
+            text-align: center;
+            font-weight: bold;
+            padding: 8px;
+            border: 1px solid #ddd;
+        }
+
+        /* เพิ่มเส้นขอบให้ input */
+        thead input {
+            width: 90%;
+            padding: 4px;
+            margin: 2px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        /* สลับสีแถวใน tbody */
+        tbody tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        tbody tr:hover {
+            background-color: #ddd; /* เปลี่ยนสีเมื่อ hover */
+        }
+
+        /* เส้นขอบสำหรับตาราง */
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+        }
+</style>
+
+@* <h2 class="styled-title">@ViewData["Title"]</h2> *@
+<h2 class="styled-title">Template Compare Material Cost by BOM</h2>
+
+
+<link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css" />
+<link rel="stylesheet" href="https://cdn.datatables.net/buttons/2.4.1/css/buttons.dataTables.min.css" />
+
+<table id="dataTable" class="display nowrap" style="width:100%">
+    <thead>
+        <!-- Header สำหรับส่วนหลัก -->
+        <tr>
+            <th colspan="15" style="text-align: center; font-weight: bold; border: 1px solid black;font-size: 1.5rem;font-weight: bold;">SAP</th>
+            <th colspan="25" style="text-align: center; font-weight: bold; border: 1px solid black;font-size: 1.5rem;font-weight: bold;">AS400</th>
+            <th colspan="5" style="text-align: center; font-weight: bold; border: 1px solid black;font-size: 1.5rem;font-weight: bold;">Amount DIFF (AS400-SAP)</th>
+            <th colspan="5" style="text-align: center; font-weight: bold; border: 1px solid black;font-size: 1.5rem;font-weight: bold;">% DIFF (Amount diff/AS400)</th>
+            <th style="text-align: center; font-weight: bold; border: 1px solid black;font-size: 1.5rem;font-weight: bold;">Reason (Value deducted scrap)</th>
+            <th style="text-align: center; font-weight: bold; border: 1px solid black;font-size: 1.5rem;font-weight: bold;">Reason (Total value included scrap)</th>
+        </tr>
+       <tr>
+            <th>Sapkey</th>
+            <th>SapModel</th>
+            <th>SapPlant</th>
+            <th>SapParentMat</th>
+            <th>SapComponent</th>
+            <th>SapLv</th>
+            <th>SapQuantityUnit</th>
+            <th>SapNoCost</th>
+            <th>SapPhantomItem</th>
+            <th>SapStdPrice</th>
+            <th>SapTotalScrap</th>
+            <th>SapPriceQtyUnit</th>
+            <th>SapTotalQuantity</th>
+            <th>SapSumValue</th>
+            <th>SapSumTotalValue</th>
+            <th>As400key</th>
+            <th>As400Model</th>
+            <th>As400Plant</th>
+            <th>As400ParentMat</th>
+            <th>As400Component</th>
+            <th>As400Lv</th>
+            <th>As400QuantityUnit</th>
+            <th>As400NoCost</th>
+            <th>As400PhantomItem</th>
+            <th>As400StdPrice</th>
+            <th>As400TotalScrap</th>
+            <th>As400PriceQtyUnit</th>
+            <th>As400TotalQuantity</th>
+            <th>As400SumValue</th>
+            <th>As400SumTotalValue</th>
+            <th>AlternativeUnit</th>
+            <th>Numerator</th>
+            <th>Denominator</th>
+            <th>BaseUnit</th>
+            <th>StatusCheckUnit</th>
+            <th>StdpricePerConvertToSap</th>
+            <th>SumDeductedScrapInsapbaseunit</th>
+            <th>SumTotalQuantityInsapbaseunit</th>
+            <th>SumValueDeductedScrapInsapbaseunit</th>
+            <th>SumTotalValueInsapbaseunit</th>
+            <th>DiffStdPrice</th>
+            <th>DiffDeductedScrapInbaseunit</th>
+            <th>DiffTotalQuantityInbaseunit</th>
+            <th>DiffSumValueDeductedScrapInbaseunit</th>
+            <th>DiffSumTotalValueInsapbaseunit</th>
+            <th>PercentDiffStdPrice</th>
+            <th>PercentDiffDeductedScrapInbaseunit</th>
+            <th>PercentDiffTotalQuantityInbaseunit</th>
+            <th>PercentDiffSumValueDeductedScrapInbaseunit</th>
+            <th>PercentDiffSumTotalValueInsapbaseunit</th>
+            <th>Reasondedected</th>
+            <th>Reasonincluded</th>
+        </tr>
+        <tr>
+            <th><input type="text" placeholder="Search Sapkey" /></th>
+            <th><input type="text" placeholder="Search SapModel" /></th>
+            <th><input type="text" placeholder="Search SapPlant" /></th>
+            <th><input type="text" placeholder="Search SapParentMat" /></th>
+            <th><input type="text" placeholder="Search SapComponent" /></th>
+            <th><input type="text" placeholder="Search SapLv" /></th>
+            <th><input type="text" placeholder="Search SapQuantityUnit" /></th>
+            <th><input type="text" placeholder="Search SapNoCost" /></th>
+            <th><input type="text" placeholder="Search SapPhantomItem" /></th>
+            <th><input type="text" placeholder="Search SapStdPrice" /></th>
+            <th><input type="text" placeholder="Search SapTotalScrap" /></th>
+            <th><input type="text" placeholder="Search SapPriceQtyUnit" /></th>
+            <th><input type="text" placeholder="Search SapTotalQuantity" /></th>
+            <th><input type="text" placeholder="Search SapSumValue" /></th>
+            <th><input type="text" placeholder="Search SapSumTotalValue" /></th>
+            <th><input type="text" placeholder="Search As400key" /></th>
+            <th><input type="text" placeholder="Search As400Model" /></th>
+            <th><input type="text" placeholder="Search As400Plant" /></th>
+            <th><input type="text" placeholder="Search As400ParentMat" /></th>
+            <th><input type="text" placeholder="Search As400Component" /></th>
+            <th><input type="text" placeholder="Search As400Lv" /></th>
+            <th><input type="text" placeholder="Search As400QuantityUnit" /></th>
+            <th><input type="text" placeholder="Search As400NoCost" /></th>
+            <th><input type="text" placeholder="Search As400PhantomItem" /></th>
+            <th><input type="text" placeholder="Search As400StdPrice" /></th>
+            <th><input type="text" placeholder="Search As400TotalScrap" /></th>
+            <th><input type="text" placeholder="Search As400PriceQtyUnit" /></th>
+            <th><input type="text" placeholder="Search As400TotalQuantity" /></th>
+            <th><input type="text" placeholder="Search As400SumValue" /></th>
+            <th><input type="text" placeholder="Search As400SumTotalValue" /></th>
+            <th><input type="text" placeholder="Search AlternativeUnit" /></th>
+            <th><input type="text" placeholder="Search Numerator" /></th>
+            <th><input type="text" placeholder="Search Denominator" /></th>
+            <th><input type="text" placeholder="Search BaseUnit" /></th>
+            <th><input type="text" placeholder="Search StatusCheckUnit" /></th>
+            <th><input type="text" placeholder="Search StdpricePerConvertToSap" /></th>
+            <th><input type="text" placeholder="Search SumDeductedScrapInsapbaseunit" /></th>
+            <th><input type="text" placeholder="Search SumTotalQuantityInsapbaseunit" /></th>
+            <th><input type="text" placeholder="Search SumValueDeductedScrapInsapbaseunit" /></th>
+            <th><input type="text" placeholder="Search SumTotalValueInsapbaseunit" /></th>
+            <th><input type="text" placeholder="Search DiffStdPrice" /></th>
+            <th><input type="text" placeholder="Search DiffDeductedScrapInbaseunit" /></th>
+            <th><input type="text" placeholder="Search DiffTotalQuantityInbaseunit" /></th>
+            <th><input type="text" placeholder="Search DiffSumValueDeductedScrapInbaseunit" /></th>
+            <th><input type="text" placeholder="Search DiffSumTotalValueInsapbaseunit" /></th>
+            <th><input type="text" placeholder="Search PercentDiffStdPrice" /></th>
+            <th><input type="text" placeholder="Search PercentDiffDeductedScrapInbaseunit" /></th>
+            <th><input type="text" placeholder="Search PercentDiffTotalQuantityInbaseunit" /></th>
+            <th><input type="text" placeholder="Search PercentDiffSumValueDeductedScrapInbaseunit" /></th>
+            <th><input type="text" placeholder="Search PercentDiffSumTotalValueInsapbaseunit" /></th>
+            <th><input type="text" placeholder="Search Reasondedected" /></th>
+            <th><input type="text" placeholder="Search Reasonincluded" /></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.Sapkey</td>
+                <td>@item.SapModel</td>
+                <td>@item.SapPlant</td>
+                <td>@item.SapParentMat</td>
+                <td>@item.SapComponent</td>
+                <td>@item.SapLv</td>
+                <td>@item.SapQuantityUnit</td>
+                <td>@item.SapNoCost</td>
+                <td>@item.SapPhantomItem</td>
+                <td>@item.SapStdPrice</td>
+                <td>@item.SapTotalScrap</td>
+                <td>@item.SapPriceQtyUnit</td>
+                <td>@item.SapTotalQuantity</td>
+                <td>@item.SapSumValue</td>
+                <td>@item.SapSumTotalValue</td>
+                <td>@item.As400key</td>
+                <td>@item.As400Model</td>
+                <td>@item.As400Plant</td>
+                <td>@item.As400ParentMat</td>
+                <td>@item.As400Component</td>
+                <td>@item.As400Lv</td>
+                <td>@item.As400QuantityUnit</td>
+                <td>@item.As400NoCost</td>
+                <td>@item.As400PhantomItem</td>
+                <td>@item.As400StdPrice</td>
+                <td>@item.As400TotalScrap</td>
+                <td>@item.As400PriceQtyUnit</td>
+                <td>@item.As400TotalQuantity</td>
+                <td>@item.As400SumValue</td>
+                <td>@item.As400SumTotalValue</td>
+                <td>@item.AlternativeUnit</td>
+                <td>@item.Numerator</td>
+                <td>@item.Denominator</td>
+                <td>@item.BaseUnit</td>
+                <td>@item.StatusCheckUnit</td>
+                <td>@item.StdpricePerConvertToSap</td>
+                <td>@item.SumDeductedScrapInsapbaseunit</td>
+                <td>@item.SumTotalQuantityInsapbaseunit</td>
+                <td>@item.SumValueDeductedScrapInsapbaseunit</td>
+                <td>@item.SumTotalValueInsapbaseunit</td>
+                <td>@item.DiffStdPrice</td>
+                <td>@item.DiffDeductedScrapInbaseunit</td>
+                <td>@item.DiffTotalQuantityInbaseunit</td>
+                <td>@item.DiffSumValueDeductedScrapInbaseunit</td>
+                <td>@item.DiffSumTotalValueInsapbaseunit</td>
+                <td>@item.PercentDiffStdPrice</td>
+                <td>@item.PercentDiffDeductedScrapInbaseunit</td>
+                <td>@item.PercentDiffTotalQuantityInbaseunit</td>
+                <td>@item.PercentDiffSumValueDeductedScrapInbaseunit</td>
+                <td>@item.PercentDiffSumTotalValueInsapbaseunit</td>
+                @* Reasondedected *@
+                <td style="font-weight: bold; font-size: 20px; text-align: center; 
+                        color: @(item.SumValueDeductedScrapInsapbaseunit?.ToString() == "0.00" ? "green" : "red");">
+                    @if (@item.SumValueDeductedScrapInsapbaseunit?.ToString() == "0.00")
+                    {
+                        @:No diff amount
+                    }
+                    else if (@item.SumValueDeductedScrapInsapbaseunit?.ToString() != "0.000" && 
+                            @item.SumDeductedScrapInsapbaseunit?.ToString() == "0.000")
+                    {
+                        @:Diff amount
+                    }
+                    else if (@item.SumDeductedScrapInsapbaseunit?.ToString() != "0.000" && 
+                            @item.StdpricePerConvertToSap?.ToString() == "0.000")
+                    {
+                        @:Diff quantity
+                    }
+                    else if (@item.SumDeductedScrapInsapbaseunit?.ToString() != "0.000" && 
+                            @item.StdpricePerConvertToSap?.ToString() != "0.000")
+                    {
+                        @:Diff amount & diff quantity
+                    }
+                    else if (@item.As400Model?.ToString()       == "" && 
+                            @item.As400Plant?.ToString()        == "" && 
+                            @item.As400Component?.ToString()    == "" &&
+                            @item.As400Lv.ToString()            == "")
+                    {
+                        @:Z1 Key exists in SAP but not in AS400
+                    }
+                    else if (@item.SapModel?.ToString()     == "" && 
+                            @item.SapPlant?.ToString()      == "" && 
+                            @item.SapComponent?.ToString()  == "" &&
+                            @item.SapLv.ToString()          == "")
+                    {
+                        @:Z2 Key exists in AS400 but not in SAP
+                    }
+                    else
+                    {
+                        @item.Reasondedected
+                    }
+                </td>
+
+                @* Reasonincluded *@
+                <td style="font-weight: bold; font-size: 20px; text-align: center; 
+                        color: @(item.DiffSumTotalValueInsapbaseunit?.ToString() == "0.00" ? "green" : "red");">
+                    @if (@item.DiffSumTotalValueInsapbaseunit?.ToString() == "0.00")
+                    {
+                        @:No diff amount
+                    }
+                    else if (@item.DiffSumTotalValueInsapbaseunit?.ToString() != "0.000" && 
+                            @item.SumTotalQuantityInsapbaseunit?.ToString() == "0.000")
+                    {
+                        @:Diff amount
+                    }
+                    else if (@item.SumTotalQuantityInsapbaseunit?.ToString() != "0.000" && 
+                            @item.StdpricePerConvertToSap?.ToString() == "0.000")
+                    {
+                        @:Diff quantity
+                    }
+                    else if (@item.DiffSumTotalValueInsapbaseunit?.ToString() != "0.000" && 
+                            @item.SumTotalQuantityInsapbaseunit?.ToString() != "0.000")
+                    {
+                        @:Diff amount & diff quantity
+                    }
+                    else if (@item.As400Model?.ToString()     == null && 
+                            @item.As400Plant?.ToString()      == null && 
+                            @item.As400Component?.ToString()  == null &&
+                            @item.As400Lv.ToString() == null)
+                    {
+                        @:Z1 Key exists in SAP but not in AS400
+                    }
+                    else if (@item.SapModel?.ToString()     == null && 
+                            @item.SapPlant?.ToString()      == null && 
+                            @item.SapComponent?.ToString() == null &&
+                            @item.SapLv.ToString() == null)
+                    {
+                        @:Z2 Key exists in AS400 but not in SAP
+                    }
+                    else
+                    {
+                        @item.Reasonincluded
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+    <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/2.4.1/js/dataTables.buttons.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/2.4.1/js/buttons.html5.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        // Show loading alert immediately when page loads
+        Swal.fire({
+            title: 'Loading...',
+            html: 'Please wait while the data is being loaded.',
+            icon: 'info',
+            allowOutsideClick: false,
+            didOpen: () => {
+                Swal.showLoading();
+            }
+        });
+
+        var table = $('#dataTable').DataTable({
+            dom: '<"top"fBlp>rt<"bottom"i><"clear">',
+            orderCellsTop: true, // ใช้แถวแรกของ thead สำหรับจัดเรียงและการ Export
+            buttons: [
+                {
+                    extend: 'copy',
+                    text: 'Copy',
+                    exportOptions: {
+                        columns: ':visible',
+                        header: true, // รวม Header
+                    }
+                },
+                {
+                    extend: 'csv',
+                    text: 'CSV',
+                    exportOptions: {
+                        columns: ':visible',
+                        header: true,
+                    }
+                },
+                {
+                    extend: 'excel',
+                    text: 'Excel',
+                    exportOptions: {
+                        columns: ':visible',
+                        header: true,
+                    }
+                }
+            ],
+            scrollX: true,
+            search:true,
+            pageLength: 5,
+            lengthMenu: [[5, 10, 25, 50, 100, -1], [5, 10, 25, 50, 100, 'ALL']],
+            initComplete: function () {
+                Swal.close(); // Close the loading alert
+
+                // ใช้แถวที่ 2 ของ thead สำหรับ input
+                var api = this.api();
+                $(api.table().header()).find('tr').eq(2).find('input').each(function (index) {
+                    $(this).on('keyup change clear', function () {
+                        if (api.column(index).search() !== this.value) {
+                            api.column(index).search(this.value).draw();
+                        }
+                    });
+                });
+            }
+        });
+
+    });
+</script>
+
+
+
+
+

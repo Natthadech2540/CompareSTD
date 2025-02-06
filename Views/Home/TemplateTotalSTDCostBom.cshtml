@@ -1,0 +1,314 @@
+﻿@model IEnumerable<TemplateSTD.Models.STD.CompareTotalStdcost>
+
+@{
+    ViewData["Title"] = "Template Compare Total STD cost";
+}
+<style>
+    .styled-title {
+        border: 2px solid #4CAF50; /* กรอบสีเขียว */
+        border-radius: 10px; /* มุมโค้งมน */
+        background-color: #f9f9f9; /* พื้นหลังสีอ่อน */
+        padding: 15px; /* ระยะห่างภายใน */
+        text-align: center; /* จัดข้อความกึ่งกลาง */
+        font-size: 24px; /* ขนาดตัวอักษร */
+        font-weight: bold; /* ตัวหนา */
+        color: #333; /* สีข้อความ */
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* เงา */
+        margin-bottom: 20px; /* ระยะห่างด้านล่าง */
+    }
+
+
+        /* ตกแต่ง thead */
+        thead th {
+            background-color: #007B80; /* สีพื้นหลัง */
+            color: white; /* สีข้อความ */
+            text-align: center;
+            font-weight: bold;
+            padding: 8px;
+            border: 1px solid #ddd;
+        }
+
+        /* เพิ่มเส้นขอบให้ input */
+        thead input {
+            width: 90%;
+            padding: 4px;
+            margin: 2px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        /* สลับสีแถวใน tbody */
+        tbody tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        tbody tr:hover {
+            background-color: #ddd; /* เปลี่ยนสีเมื่อ hover */
+        }
+
+        /* เส้นขอบสำหรับตาราง */
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+        }
+
+      /* Preload Modal */
+.preload-modal {
+    display: flex; /* ใช้ Flexbox เพื่อจัดกึ่งกลาง */
+    align-items: center;
+    justify-content: center;
+    position: fixed;
+    z-index: 9999;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6); /* สีพื้นหลังโปร่ง */
+}
+
+.preload-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    border: 3px solid #007B80; /* กรอบสีเขียว */
+    border-radius: 15px; /* มุมโค้งมน */
+    background-color: #fff; /* พื้นหลังสีขาว */
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2); /* เงา */
+    text-align: center;
+    color: #333; /* สีข้อความ */
+    font-size: 1.2rem;
+}
+
+/* Spinner */
+.spinner {
+    width: 50px;
+    height: 50px;
+    margin-bottom: 15px;
+    border: 6px solid #ddd; /* สีพื้นของวงกลม */
+    border-top: 6px solid #007B80; /* สีของวงกลมที่หมุน */
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+</style>
+
+<!-- Preload Modal -->
+<div id="preloadModal" class="preload-modal">
+    <div class="preload-content">
+        <div class="spinner"></div>
+        <p>Loading... Please wait.</p>
+    </div>
+</div>
+
+@* <h2 class="styled-title">@ViewData["Title"]</h2> *@
+<h2 class="styled-title">Template Compare Total STD cost</h2>
+
+
+<link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css" />
+<link rel="stylesheet" href="https://cdn.datatables.net/buttons/2.4.1/css/buttons.dataTables.min.css" />
+
+<table id="dataTable" class="display nowrap" style="width:100%">
+    <thead>
+        <!-- Header สำหรับส่วนหลัก -->
+        <tr>
+            <th colspan="13" style="text-align: center; font-weight: bold; border: 1px solid black;font-size: 1.5rem;font-weight: bold;">SAP</th>
+            <th colspan="13" style="text-align: center; font-weight: bold; border: 1px solid black;font-size: 1.5rem;font-weight: bold;">AS400</th>
+            <th colspan="7"  style="text-align: center; font-weight: bold; border: 1px solid black;font-size: 1.5rem;font-weight: bold;">Amount DIFF (AS400-SAP)</th>
+            <th colspan="7"  style="text-align: center; font-weight: bold; border: 1px solid black;font-size: 1.5rem;font-weight: bold;">% DIFF (Amount diff/AS400)</th>
+        </tr>
+       <tr>
+            <th>SapFiscalYear</th>
+            <th>SapModel</th>
+            <th>SapMaterailCost</th>
+            <th>SapProcessCost</th>
+            <th>SapOhcost</th>
+            <th>SapSrvpackingpercent</th>
+            <th>SapSrvpackingCost</th>
+            <th>SapTotalStdcost</th>
+            <th>SapTotalStdcostRound</th>
+            <th>SapUnit</th>
+            <th>SapPriceperunit</th>
+            <th>SapTotalTs</th>
+            <th>SapTsunit</th>
+            <th>As400FiscalYear</th>
+            <th>As400Model</th>
+            <th>As400MaterailCost</th>
+            <th>As400ProcessCost</th>
+            <th>As400Ohcost</th>
+            <th>As400Srvpackingpercent</th>
+            <th>As400SrvpackingCost</th>
+            <th>As400TotalStdcost</th>
+            <th>As400TotalStdcostRound</th>
+            <th>As400Unit</th>
+            <th>As400Priceperunit</th>
+            <th>As400TotalTs</th>
+            <th>As400Tsunit</th>
+            <th>DiffMaterialCost</th>
+            <th>DiffProcessCost</th>
+            <th>DiffOhcost</th>
+            <th>DiffSrvpackingCost</th>
+            <th>DiffTotalStdcost</th>
+            <th>DiffTotalStdcostRound</th>
+            <th>DiffTotalTs</th>
+            <th>PercentDiffMaterialCost</th>
+            <th>PercentDiffProcessCost</th>
+            <th>PercentDiffOhcost</th>
+            <th>PercentDiffSrvpackingCost</th>
+            <th>PercentDiffTotalStdcost</th>
+            <th>PercentDiffTotalStdcostRound</th>
+            <th>PercentDiffTotalTs</th>
+        </tr>
+        <tr>
+            <th><input type="text" placeholder="Search SapFiscalYear" /></th>
+            <th><input type="text" placeholder="Search SapModel" /></th>
+            <th><input type="text" placeholder="Search SapMaterailCost" /></th>
+            <th><input type="text" placeholder="Search SapProcessCost" /></th>
+            <th><input type="text" placeholder="Search SapOhcost" /></th>
+            <th><input type="text" placeholder="Search SapSrvpackingpercent" /></th>
+            <th><input type="text" placeholder="Search SapSrvpackingCost" /></th>
+            <th><input type="text" placeholder="Search SapTotalStdcost" /></th>
+            <th><input type="text" placeholder="Search SapTotalStdcostRound" /></th>
+            <th><input type="text" placeholder="Search SapUnit" /></th>
+            <th><input type="text" placeholder="Search SapPriceperunit" /></th>
+            <th><input type="text" placeholder="Search SapTotalTs" /></th>
+            <th><input type="text" placeholder="Search SapTsunit" /></th>
+            <th><input type="text" placeholder="Search As400FiscalYear" /></th>
+            <th><input type="text" placeholder="Search As400Model" /></th>
+            <th><input type="text" placeholder="Search As400MaterailCost" /></th>
+            <th><input type="text" placeholder="Search As400ProcessCost" /></th>
+            <th><input type="text" placeholder="Search As400Ohcost" /></th>
+            <th><input type="text" placeholder="Search As400Srvpackingpercent" /></th>
+            <th><input type="text" placeholder="Search As400SrvpackingCost" /></th>
+            <th><input type="text" placeholder="Search As400TotalStdcost" /></th>
+            <th><input type="text" placeholder="Search As400TotalStdcostRound" /></th>
+            <th><input type="text" placeholder="Search As400Unit" /></th>
+            <th><input type="text" placeholder="Search As400Priceperunit" /></th>
+            <th><input type="text" placeholder="Search As400TotalTs" /></th>
+            <th><input type="text" placeholder="Search As400Tsunit" /></th>
+            <th><input type="text" placeholder="Search DiffMaterialCost" /></th>
+            <th><input type="text" placeholder="Search DiffProcessCost" /></th>
+            <th><input type="text" placeholder="Search DiffOhcost" /></th>
+            <th><input type="text" placeholder="Search DiffSrvpackingCost" /></th>
+            <th><input type="text" placeholder="Search DiffTotalStdcost" /></th>
+            <th><input type="text" placeholder="Search DiffTotalStdcostRound" /></th>
+            <th><input type="text" placeholder="Search DiffTotalTs" /></th>
+            <th><input type="text" placeholder="Search PercentDiffMaterialCost" /></th>
+            <th><input type="text" placeholder="Search PercentDiffProcessCost" /></th>
+            <th><input type="text" placeholder="Search PercentDiffOhcost" /></th>
+            <th><input type="text" placeholder="Search PercentDiffSrvpackingCost" /></th>
+            <th><input type="text" placeholder="Search PercentDiffTotalStdcost" /></th>
+            <th><input type="text" placeholder="Search PercentDiffTotalStdcostRound" /></th>
+            <th><input type="text" placeholder="Search PercentDiffTotalTs" /></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.SapFiscalYear</td>
+                <td>@item.SapModel</td>
+                <td>@item.SapMaterialCost</td>
+                <td>@item.SapProcessCost</td>
+                <td>@item.SapOhcost</td>
+                <td>@item.SapSrvpackingpercent</td>
+                <td>@item.SapSrvpackingCost</td>
+                <td>@item.SapTotalStdcost</td>
+                <td>@item.SapTotalStdcostRound</td>
+                <td>@item.SapUnit</td>
+                <td>@item.SapPriceperunit</td>
+                <td>@item.SapTotalTs</td>
+                <td>@item.SapTsunit</td>
+                <td>@item.As400FiscalYear</td>
+                <td>@item.As400Model</td>
+                <td>@item.As400MaterialCost</td>
+                <td>@item.As400ProcessCost</td>
+                <td>@item.As400Ohcost</td>
+                <td>@item.As400Srvpackingpercent</td>
+                <td>@item.As400SrvpackingCost</td>
+                <td>@item.As400TotalStdcost</td>
+                <td>@item.As400TotalStdcostRound</td>
+                <td>@item.As400Unit</td>
+                <td>@item.As400Priceperunit</td>
+                <td>@item.As400TotalTs</td>
+                <td>@item.As400Tsunit</td>
+                <td>@item.DiffMaterialCost</td>
+                <td>@item.DiffProcessCost</td>
+                <td>@item.DiffOhcost</td>
+                <td>@item.DiffSrvpackingCost</td>
+                <td>@item.DiffTotalStdcost</td>
+                <td>@item.DiffTotalStdcostRound</td>
+                <td>@item.DiffTotalTs</td>
+                <td>@item.PercentDiffMaterialCost</td>
+                <td>@item.PercentDiffProcessCost</td>
+                <td>@item.PercentDiffOhcost</td>
+                <td>@item.PercentDiffSrvpackingCost</td>
+                <td>@item.PercentDiffTotalStdcost</td>
+                <td>@item.PercentDiffTotalStdcostRound</td>
+                <td>@item.PercentDiffTotalTs</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+    <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/2.4.1/js/dataTables.buttons.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/2.4.1/js/buttons.html5.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        // แสดง Preload Modal
+        var preloadModal = document.getElementById("preloadModal");
+        preloadModal.style.display = "flex";
+
+        // เริ่มต้น DataTable
+        var table = $('#dataTable').DataTable({
+            dom: '<"top"fBlp>rt<"bottom"i><"clear">',
+            orderCellsTop: true,
+            buttons: [
+                {
+                    extend: 'copy',
+                    text: 'Copy',
+                    exportOptions: { columns: ':visible', header: true }
+                },
+                {
+                    extend: 'csv',
+                    text: 'CSV',
+                    title: 'TemplateCompareTotalSTDCost',
+                    exportOptions: { columns: ':visible', header: true }
+                },
+                {
+                    extend: 'excel',
+                    text: 'Excel',
+                    title: 'TemplateCompareTotalSTDCost',
+                    exportOptions: { columns: ':visible', header: true }
+                },
+                {
+                    extend: 'colvis', // เพิ่มปุ่ม ColVis ที่ใช้สำหรับการซ่อน/แสดงคอลัมน์
+                    text: 'Show/Hide Columns' // เปลี่ยนข้อความปุ่มถ้าต้องการ
+                }
+            ],
+            scrollX: true,
+            orderCellsTop: true,
+            search: true,
+            pageLength: 5,
+            lengthMenu: [[5, 10, 25, 50, 100, -1], [5, 10, 25, 50, 100, 'ALL']],
+            initComplete: function () {
+                // ซ่อน Preload Modal เมื่อโหลดเสร็จ
+                preloadModal.style.display = "none";
+
+                // ใช้แถวที่ 2 ของ thead สำหรับ input
+                var api = this.api();
+                $(api.table().header()).find('tr').eq(2).find('input').each(function (index) {
+                    $(this).on('keyup change clear', function () {
+                        if (api.column(index).search() !== this.value) {
+                            api.column(index).search(this.value).draw();
+                        }
+                    });
+                });
+            }
+        });
+    });
+</script>
