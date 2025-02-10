@@ -187,15 +187,15 @@ public class HomeController : Controller
             var worksheet = package.Workbook.Worksheets.Add("MasterMaterialBasics");
 
             // เขียนชื่อคอลัมน์ (Header)
-            worksheet.Cells[1, 1].Value = "No";  
-            worksheet.Cells[1, 2].Value = "Material";  
-            worksheet.Cells[1, 3].Value = "MaterialDescription";  
-            worksheet.Cells[1, 4].Value = "OldMaterialNumber";  
-            worksheet.Cells[1, 5].Value = "MaterialType";
-            worksheet.Cells[1, 6].Value = "BaseUnitOfMeasure";  
-            worksheet.Cells[1, 7].Value = "AlternativeUnitOfMeasure";  
-            worksheet.Cells[1, 8].Value = "YNumerator";  
-            worksheet.Cells[1, 9].Value = "XDenominator";  
+            worksheet.Cells[1, 1].Value  = "No";  
+            worksheet.Cells[1, 2].Value  = "Material";  
+            worksheet.Cells[1, 3].Value  = "MaterialDescription";  
+            worksheet.Cells[1, 4].Value  = "OldMaterialNumber";  
+            worksheet.Cells[1, 5].Value  = "MaterialType";
+            worksheet.Cells[1, 6].Value  = "BaseUnitOfMeasure";  
+            worksheet.Cells[1, 7].Value  = "AlternativeUnitOfMeasure";  
+            worksheet.Cells[1, 8].Value  = "YNumerator";  
+            worksheet.Cells[1, 9].Value  = "XDenominator";  
             worksheet.Cells[1, 10].Value = "BulkMaterial";
             worksheet.Cells[1, 11].Value = "IssueUnit";
             worksheet.Cells[1, 12].Value = "Createdatetime";    
@@ -204,15 +204,15 @@ public class HomeController : Controller
             int row = 2;  // เริ่มต้นที่แถวที่ 2
             foreach (var item in MasterMaterialUnits)
             {
-                worksheet.Cells[row, 1].Value = item.No;  
-                worksheet.Cells[row, 2].Value = item.Material;
-                worksheet.Cells[row, 3].Value = item.MaterialDescription;
-                worksheet.Cells[row, 4].Value = item.OldMaterialNumber;
-                worksheet.Cells[row, 5].Value = item.MaterialType;
-                worksheet.Cells[row, 6].Value = item.BaseUnitOfMeasure;
-                worksheet.Cells[row, 7].Value = item.AlternativeUnitOfMeasure;
-                worksheet.Cells[row, 8].Value = item.YNumerator;
-                worksheet.Cells[row, 9].Value = item.XDenominator;
+                worksheet.Cells[row, 1].Value  = item.No;  
+                worksheet.Cells[row, 2].Value  = item.Material;
+                worksheet.Cells[row, 3].Value  = item.MaterialDescription;
+                worksheet.Cells[row, 4].Value  = item.OldMaterialNumber;
+                worksheet.Cells[row, 5].Value  = item.MaterialType;
+                worksheet.Cells[row, 6].Value  = item.BaseUnitOfMeasure;
+                worksheet.Cells[row, 7].Value  = item.AlternativeUnitOfMeasure;
+                worksheet.Cells[row, 8].Value  = item.YNumerator;
+                worksheet.Cells[row, 9].Value  = item.XDenominator;
                 worksheet.Cells[row, 10].Value = item.BulkMaterial;
                 worksheet.Cells[row, 11].Value = item.IssueUnit;
                 // แปลงวันที่จาก serial date number เป็น DateTime
@@ -265,7 +265,7 @@ public class HomeController : Controller
         using (var package = new ExcelPackage())
         {
             // สร้าง worksheet ใหม่
-            var worksheet = package.Workbook.Worksheets.Add("CompareCostBoms");
+            var worksheet = package.Workbook.Worksheets.Add("CostBom_AS400");
 
             // เขียนชื่อคอลัมน์ (Header)
             worksheet.Cells[1, 1].Value  = "AS400Model";  
@@ -295,7 +295,7 @@ public class HomeController : Controller
             worksheet.Cells[1, 25].Value = "AS400MSize";  
             worksheet.Cells[1, 26].Value = "AS400QuantityModel";  
             worksheet.Cells[1, 27].Value = "AS400Scrap";  
-            worksheet.Cells[1, 28].Value = "AS400TotalScrap";  
+            worksheet.Cells[1, 28].Value = "AS400TotalQty(Deductedscrap)";  
             worksheet.Cells[1, 29].Value = "AS400TotalQuantity";  
             worksheet.Cells[1, 30].Value = "AS400QuantityUnit";  
             worksheet.Cells[1, 31].Value = "AS400Import";  
@@ -305,7 +305,7 @@ public class HomeController : Controller
             worksheet.Cells[1, 35].Value = "AS400PriceQtyUnit";  
             worksheet.Cells[1, 36].Value = "AS400NoPrice";  
             worksheet.Cells[1, 37].Value = "AS400NoCost";  
-            worksheet.Cells[1, 38].Value = "AS400SumValue";  
+            worksheet.Cells[1, 38].Value = "AS400SumValue(Deductedscrap)";  
             worksheet.Cells[1, 39].Value = "AS400SumTotalValue";  
             worksheet.Cells[1, 40].Value = "AS400PurPriceCur";  
             worksheet.Cells[1, 41].Value = "AS400ItemClass";  
@@ -381,7 +381,7 @@ public class HomeController : Controller
         using (var package = new ExcelPackage())
         {
             // สร้าง worksheet ใหม่
-            var worksheet = package.Workbook.Worksheets.Add("CompareCostBoms");
+            var worksheet = package.Workbook.Worksheets.Add("CostBom_SAP");
 
             // เขียนชื่อคอลัมน์ (Header)
             worksheet.Cells[1, 1].Value  = "SAPModel";  
@@ -411,7 +411,7 @@ public class HomeController : Controller
             worksheet.Cells[1, 25].Value = "SAPMSize";  
             worksheet.Cells[1, 26].Value = "SAPQuantityModel";  
             worksheet.Cells[1, 27].Value = "SAPScrap";  
-            worksheet.Cells[1, 28].Value = "SAPTotalScrap";  
+            worksheet.Cells[1, 28].Value = "SAPTotalQty(Deductedscrap)";  
             worksheet.Cells[1, 29].Value = "SAPTotalQuantity";  
             worksheet.Cells[1, 30].Value = "SAPQuantityUnit";  
             worksheet.Cells[1, 31].Value = "SAPImport";  
@@ -421,7 +421,7 @@ public class HomeController : Controller
             worksheet.Cells[1, 35].Value = "SAPPriceQtyUnit";  
             worksheet.Cells[1, 36].Value = "SAPNoPrice";  
             worksheet.Cells[1, 37].Value = "SAPNoCost";  
-            worksheet.Cells[1, 38].Value = "SAPSumValue";  
+            worksheet.Cells[1, 38].Value = "SAPSumValue(Deductedscrap)";  
             worksheet.Cells[1, 39].Value = "SAPSumTotalValue";  
             worksheet.Cells[1, 40].Value = "SAPPurPriceCur";  
             worksheet.Cells[1, 41].Value = "SAPItemClass";  
@@ -518,104 +518,102 @@ public class HomeController : Controller
             worksheet.Cells[1, 3].Value  = "SapPlant";  
             worksheet.Cells[1, 4].Value  = "SapParentMat";  
             worksheet.Cells[1, 5].Value  = "SapComponent";  
-            worksheet.Cells[1, 6].Value  = "SapLv";  
-            worksheet.Cells[1, 7].Value  = "SapQuantityUnit";  
-            worksheet.Cells[1, 8].Value  = "SapNoCost";  
-            worksheet.Cells[1, 9].Value  = "SapPhantomItem";  
-            worksheet.Cells[1, 10].Value = "SapStdPrice";  
-            worksheet.Cells[1, 11].Value = "SapTotalScrap";  
-            worksheet.Cells[1, 12].Value = "SapPriceQtyUnit";  
-            worksheet.Cells[1, 13].Value = "SapTotalQuantity";  
-            worksheet.Cells[1, 14].Value = "SapSumValue";  
-            worksheet.Cells[1, 15].Value = "SapSumTotalValue";
+            worksheet.Cells[1, 6].Value  = "SapQuantityUnit";  
+            worksheet.Cells[1, 7].Value  = "SapNoCost";  
+            worksheet.Cells[1, 8].Value  = "SapPhantomItem";  
+            worksheet.Cells[1, 9].Value  = "SapStdPrice";  
+            worksheet.Cells[1, 10].Value = "SapTotalQty(DeductedScrap)";  
+            worksheet.Cells[1, 11].Value = "SapPriceQtyUnit";  
+            worksheet.Cells[1, 12].Value = "SapTotalQuantity";  
+            worksheet.Cells[1, 13].Value = "SapSumValue(DeductedScrap)";  
+            worksheet.Cells[1, 14].Value = "SapSumTotalValue";
             // กำหนดสีพื้นหลังของหัวข้อคอลัมน์เป็นสีเขียวอ่อน
-                using (var range = worksheet.Cells[1, 1, 1, 15]) // ช่วง A1 ถึง M1
+                using (var range = worksheet.Cells[1, 1, 1, 14]) // ช่วง A1 ถึง M1
                 {
                     range.Style.Fill.PatternType = ExcelFillStyle.Solid;
                     range.Style.Fill.BackgroundColor.SetColor(System.Drawing.Color.FromArgb(144, 238, 144)); // สีเขียวอ่อน (Light Green)
                     range.Style.Font.Bold = true; // ทำให้ตัวอักษรในหัวข้อหนา
                     range.Style.HorizontalAlignment = ExcelHorizontalAlignment.Center;
                 }  
-            worksheet.Cells[1, 16].Value = "As400key";  
-            worksheet.Cells[1, 17].Value = "As400Model";  
-            worksheet.Cells[1, 18].Value = "As400Plant";  
-            worksheet.Cells[1, 19].Value = "As400ParentMat";  
-            worksheet.Cells[1, 20].Value = "As400Component";  
-            worksheet.Cells[1, 21].Value = "As400Lv";  
-            worksheet.Cells[1, 22].Value = "As400QuantityUnit";  
-            worksheet.Cells[1, 23].Value = "As400NoCost";  
-            worksheet.Cells[1, 24].Value = "As400PhantomItem";  
-            worksheet.Cells[1, 25].Value = "As400StdPrice";  
-            worksheet.Cells[1, 26].Value = "As400TotalScrap";  
-            worksheet.Cells[1, 27].Value = "As400PriceQtyUnit";  
-            worksheet.Cells[1, 28].Value = "As400TotalQuantity";  
-            worksheet.Cells[1, 29].Value = "As400SumValue";  
-            worksheet.Cells[1, 30].Value = "As400SumTotalValue";  
-            worksheet.Cells[1, 31].Value = "AlternativeUnit";  
-            worksheet.Cells[1, 32].Value = "Numerator";  
-            worksheet.Cells[1, 33].Value = "Denominator";  
-            worksheet.Cells[1, 34].Value = "BaseUnit";  
-            worksheet.Cells[1, 35].Value = "StatusCheckUnit";  
-            worksheet.Cells[1, 36].Value = "StdpricePerConvertToSap";  
-            worksheet.Cells[1, 37].Value = "SumDeductedScrapInsapbaseunit";  
-            worksheet.Cells[1, 38].Value = "SumTotalQuantityInsapbaseunit";  
-            worksheet.Cells[1, 39].Value = "SumValueDeductedScrapInsapbaseunit";  
-            worksheet.Cells[1, 40].Value = "SumTotalValueInsapbaseunit"; 
-            using (var range = worksheet.Cells[1, 16, 1, 30]) // ช่วง A1 ถึง M1
+            worksheet.Cells[1, 15].Value = "As400key";  
+            worksheet.Cells[1, 16].Value = "As400Model";  
+            worksheet.Cells[1, 17].Value = "As400Plant";  
+            worksheet.Cells[1, 18].Value = "As400ParentMat";  
+            worksheet.Cells[1, 19].Value = "As400Component";   
+            worksheet.Cells[1, 20].Value = "As400QuantityUnit";  
+            worksheet.Cells[1, 21].Value = "As400NoCost";  
+            worksheet.Cells[1, 22].Value = "As400PhantomItem";  
+            worksheet.Cells[1, 23].Value = "As400StdPrice";  
+            worksheet.Cells[1, 24].Value = "As400TotalQty(DeductedScrap)";  
+            worksheet.Cells[1, 25].Value = "As400PriceQtyUnit";  
+            worksheet.Cells[1, 26].Value = "As400TotalQuantity";  
+            worksheet.Cells[1, 27].Value = "As400SumValue(DeductedScrap)";  
+            worksheet.Cells[1, 28].Value = "As400SumTotalValue";  
+            worksheet.Cells[1, 29].Value = "AlternativeUnit";  
+            worksheet.Cells[1, 30].Value = "Numerator";  
+            worksheet.Cells[1, 31].Value = "Denominator";  
+            worksheet.Cells[1, 32].Value = "BaseUnit";  
+            worksheet.Cells[1, 33].Value = "StatusCheckUnit";  
+            worksheet.Cells[1, 34].Value = "StdpricePer1ConvertToSap";  
+            worksheet.Cells[1, 35].Value = "SumQtyDeductedScrapInsapbaseunit";  
+            worksheet.Cells[1, 36].Value = "SumTotalQuantityInsapbaseunit";  
+            worksheet.Cells[1, 37].Value = "SumValueDeductedScrapInsapbaseunit";  
+            worksheet.Cells[1, 38].Value = "SumTotalValueInsapbaseunit"; 
+            using (var range = worksheet.Cells[1, 15, 1, 28]) // ช่วง A1 ถึง M1
             {
                     range.Style.Fill.PatternType = ExcelFillStyle.Solid;
                     range.Style.Fill.BackgroundColor.SetColor(System.Drawing.Color.FromArgb(255, 123, 24)); // สีเขียวอ่อน (Light Green)
                     range.Style.Font.Bold = true; // ทำให้ตัวอักษรในหัวข้อหนา
                     range.Style.HorizontalAlignment = ExcelHorizontalAlignment.Center;
             }
-            using (var range = worksheet.Cells[1, 31, 1, 35]) // ช่วง A1 ถึง M1
+            using (var range = worksheet.Cells[1, 29, 1, 33]) // ช่วง A1 ถึง M1
             {
                     range.Style.Fill.PatternType = ExcelFillStyle.Solid;
                     range.Style.Fill.BackgroundColor.SetColor(System.Drawing.Color.FromArgb(255, 255, 0)); // สีเขียวอ่อน (Light Green)
                     range.Style.Font.Bold = true; // ทำให้ตัวอักษรในหัวข้อหนา
                     range.Style.HorizontalAlignment = ExcelHorizontalAlignment.Center;
             } 
-            using (var range = worksheet.Cells[1, 36, 1, 40]) // ช่วง A1 ถึง M1
+            using (var range = worksheet.Cells[1, 34, 1, 38]) // ช่วง A1 ถึง M1
             {
                     range.Style.Fill.PatternType = ExcelFillStyle.Solid;
                     range.Style.Fill.BackgroundColor.SetColor(System.Drawing.Color.FromArgb(255, 123, 24)); // สีเขียวอ่อน (Light Green)
                     range.Style.Font.Bold = true; // ทำให้ตัวอักษรในหัวข้อหนา
                     range.Style.HorizontalAlignment = ExcelHorizontalAlignment.Center;
             }  
-            worksheet.Cells[1, 41].Value = "DiffStdPrice";  
-            worksheet.Cells[1, 42].Value = "DiffDeductedScrapInbaseunit";  
-            worksheet.Cells[1, 43].Value = "DiffTotalQuantityInbaseunit";  
-            worksheet.Cells[1, 44].Value = "DiffSumValueDeductedScrapInbaseunit";  
-            worksheet.Cells[1, 45].Value = "DiffSumTotalValueInsapbaseunit";
-            using (var range = worksheet.Cells[1, 41, 1, 45]) // ช่วง A1 ถึง M1
+            worksheet.Cells[1, 39].Value = "DiffStdPrice";  
+            worksheet.Cells[1, 40].Value = "DiffDeductedScrapInbaseunit";  
+            worksheet.Cells[1, 41].Value = "DiffTotalQuantityInbaseunit";  
+            worksheet.Cells[1, 42].Value = "DiffSumValueDeductedScrapInbaseunit";  
+            worksheet.Cells[1, 43].Value = "DiffSumTotalValueInsapbaseunit";
+            using (var range = worksheet.Cells[1, 39, 1, 43]) // ช่วง A1 ถึง M1
             {
                     range.Style.Fill.PatternType = ExcelFillStyle.Solid;
                     range.Style.Fill.BackgroundColor.SetColor(System.Drawing.Color.FromArgb(20, 234, 214)); // สีเขียวอ่อน (Light Green)
                     range.Style.Font.Bold = true; // ทำให้ตัวอักษรในหัวข้อหนา
                     range.Style.HorizontalAlignment = ExcelHorizontalAlignment.Center;
             }  
-            worksheet.Cells[1, 46].Value = "PercentDiffStdPrice";  
-            worksheet.Cells[1, 47].Value = "PercentDiffDeductedScrapInbaseunit";  
-            worksheet.Cells[1, 48].Value = "PercentDiffTotalQuantityInbaseunit";  
-            worksheet.Cells[1, 49].Value = "PercentDiffSumValueDeductedScrapInbaseunit";  
-            worksheet.Cells[1, 50].Value = "PercentDiffSumTotalValueInsapbaseunit"; 
-            using (var range = worksheet.Cells[1, 46, 1, 50]) // ช่วง A1 ถึง M1
+            worksheet.Cells[1, 44].Value = "PercentDiffStdPrice";  
+            worksheet.Cells[1, 45].Value = "PercentDiffDeductedScrapInbaseunit";  
+            worksheet.Cells[1, 46].Value = "PercentDiffTotalQuantityInbaseunit";  
+            worksheet.Cells[1, 47].Value = "PercentDiffSumValueDeductedScrapInbaseunit";  
+            worksheet.Cells[1, 48].Value = "PercentDiffSumTotalValueInsapbaseunit"; 
+            using (var range = worksheet.Cells[1, 44, 1, 48]) // ช่วง A1 ถึง M1
             {
                     range.Style.Fill.PatternType = ExcelFillStyle.Solid;
                     range.Style.Fill.BackgroundColor.SetColor(System.Drawing.Color.FromArgb(122, 164, 18)); // สีเขียวอ่อน (Light Green)
                     range.Style.Font.Bold = true; // ทำให้ตัวอักษรในหัวข้อหนา
                     range.Style.HorizontalAlignment = ExcelHorizontalAlignment.Center;
             }  
-            worksheet.Cells[1, 51].Value = "Reasondedected";
-            using (var range = worksheet.Cells[1, 51]) 
+            worksheet.Cells[1, 49].Value  = "Reasondedected";
+            using (var range = worksheet.Cells[1, 49]) 
             {
                 range.Style.Fill.PatternType = ExcelFillStyle.Solid;
                 range.Style.Fill.BackgroundColor.SetColor(System.Drawing.Color.FromArgb(255, 123, 111)); // สีชมพู (Light Pink)
                 range.Style.Font.Bold = true; // ทำให้ตัวอักษรในหัวข้อหนา
                 range.Style.HorizontalAlignment = ExcelHorizontalAlignment.Center;
             }  
-            worksheet.Cells[1, 52].Value = "Reasonincluded";
-            using (var range = worksheet.Cells[1, 52]) 
+            worksheet.Cells[1, 50].Value = "Reasonincluded";
+            using (var range = worksheet.Cells[1, 50]) 
             {
                 range.Style.Fill.PatternType = ExcelFillStyle.Solid;
                 range.Style.Fill.BackgroundColor.SetColor(System.Drawing.Color.FromArgb(185, 23, 111)); // สีชมพู (Light Pink)
@@ -623,12 +621,12 @@ public class HomeController : Controller
                 range.Style.HorizontalAlignment = ExcelHorizontalAlignment.Center;
             } 
 
-            using (var range = worksheet.Cells[1, 1, 1, 52]) // เลือกช่วงที่มีข้อมูลทั้งหมด
+            using (var range = worksheet.Cells[1, 1, 1, 50]) // เลือกช่วงที่มีข้อมูลทั้งหมด
             {
                 // ขีดเส้นขอบให้ทุกเซลล์
-                range.Style.Border.Top.Style = ExcelBorderStyle.Thin;    // ขอบบน
-                range.Style.Border.Left.Style = ExcelBorderStyle.Thin;   // ขอบซ้าย
-                range.Style.Border.Right.Style = ExcelBorderStyle.Thin;  // ขอบขวา
+                range.Style.Border.Top.Style    = ExcelBorderStyle.Thin;    // ขอบบน
+                range.Style.Border.Left.Style   = ExcelBorderStyle.Thin;   // ขอบซ้าย
+                range.Style.Border.Right.Style  = ExcelBorderStyle.Thin;  // ขอบขวา
                 range.Style.Border.Bottom.Style = ExcelBorderStyle.Thin; // ขอบล่าง
             }  
 
@@ -641,57 +639,55 @@ public class HomeController : Controller
                 worksheet.Cells[row, 3].Value  = item.SapPlant;
                 worksheet.Cells[row, 4].Value  = item.SapParentMat;
                 worksheet.Cells[row, 5].Value  = item.SapComponent;
-                worksheet.Cells[row, 6].Value  = item.SapLv;
-                worksheet.Cells[row, 7].Value  = item.SapQuantityUnit;
-                worksheet.Cells[row, 8].Value  = item.SapNoCost;
-                worksheet.Cells[row, 9].Value  = item.SapPhantomItem;
-                worksheet.Cells[row, 10].Value = item.SapStdPrice;
-                worksheet.Cells[row, 11].Value = item.SapTotalScrap;
-                worksheet.Cells[row, 12].Value = item.SapPriceQtyUnit;
-                worksheet.Cells[row, 13].Value = item.SapTotalQuantity;
-                worksheet.Cells[row, 14].Value = item.SapSumValue; 
-                worksheet.Cells[row, 15].Value = item.SapSumTotalValue;
-                worksheet.Cells[row, 16].Value = item.As400key;
-                worksheet.Cells[row, 17].Value = item.As400Model;
-                worksheet.Cells[row, 18].Value = item.As400Plant;
-                worksheet.Cells[row, 19].Value = item.As400ParentMat;
-                worksheet.Cells[row, 20].Value = item.As400Component;
-                worksheet.Cells[row, 21].Value = item.As400Lv;
-                worksheet.Cells[row, 22].Value = item.As400QuantityUnit;
-                worksheet.Cells[row, 23].Value = item.As400NoCost;
-                worksheet.Cells[row, 24].Value = item.As400PhantomItem;
-                worksheet.Cells[row, 25].Value = item.As400StdPrice;
-                worksheet.Cells[row, 26].Value = item.As400TotalScrap;
-                worksheet.Cells[row, 27].Value = item.As400PriceQtyUnit;
-                worksheet.Cells[row, 28].Value = item.As400TotalQuantity;
-                worksheet.Cells[row, 29].Value = item.As400SumValue;
-                worksheet.Cells[row, 30].Value = item.As400SumTotalValue;
-                worksheet.Cells[row, 31].Value = item.AlternativeUnit;
-                worksheet.Cells[row, 32].Value = item.Numerator;
-                worksheet.Cells[row, 33].Value = item.Denominator;
-                worksheet.Cells[row, 34].Value = item.BaseUnit;
-                worksheet.Cells[row, 35].Value = item.StatusCheckUnit;
-                worksheet.Cells[row, 36].Value = item.StdpricePerConvertToSap;
-                worksheet.Cells[row, 37].Value = item.SumDeductedScrapInsapbaseunit;
-                worksheet.Cells[row, 38].Value = item.SumTotalQuantityInsapbaseunit;
-                worksheet.Cells[row, 39].Value = item.SumValueDeductedScrapInsapbaseunit;
-                worksheet.Cells[row, 40].Value = item.SumTotalValueInsapbaseunit;
-                worksheet.Cells[row, 41].Value = item.DiffStdPrice;
-                worksheet.Cells[row, 42].Value = item.DiffDeductedScrapInbaseunit;
-                worksheet.Cells[row, 43].Value = item.DiffTotalQuantityInbaseunit;
-                worksheet.Cells[row, 44].Value = item.DiffSumValueDeductedScrapInbaseunit;
-                worksheet.Cells[row, 45].Value = item.DiffSumTotalValueInsapbaseunit;
-                worksheet.Cells[row, 46].Value = item.PercentDiffStdPrice;
-                worksheet.Cells[row, 47].Value = item.PercentDiffDeductedScrapInbaseunit;
-                worksheet.Cells[row, 48].Value = item.PercentDiffTotalQuantityInbaseunit;
-                worksheet.Cells[row, 49].Value = item.PercentDiffSumValueDeductedScrapInbaseunit;
-                worksheet.Cells[row, 50].Value = item.PercentDiffSumTotalValueInsapbaseunit;
+                worksheet.Cells[row, 6].Value  = item.SapQuantityUnit;
+                worksheet.Cells[row, 7].Value  = item.SapNoCost;
+                worksheet.Cells[row, 8].Value  = item.SapPhantomItem;
+                worksheet.Cells[row, 9].Value  = item.SapStdPrice;
+                worksheet.Cells[row, 10].Value = item.SapTotalScrap;
+                worksheet.Cells[row, 11].Value = item.SapPriceQtyUnit;
+                worksheet.Cells[row, 12].Value = item.SapTotalQuantity;
+                worksheet.Cells[row, 13].Value = item.SapSumValue; 
+                worksheet.Cells[row, 14].Value = item.SapSumTotalValue;
+                worksheet.Cells[row, 15].Value = item.As400key;
+                worksheet.Cells[row, 16].Value = item.As400Model;
+                worksheet.Cells[row, 17].Value = item.As400Plant;
+                worksheet.Cells[row, 18].Value = item.As400ParentMat;
+                worksheet.Cells[row, 19].Value = item.As400Component;
+                worksheet.Cells[row, 20].Value = item.As400QuantityUnit;
+                worksheet.Cells[row, 21].Value = item.As400NoCost;
+                worksheet.Cells[row, 22].Value = item.As400PhantomItem;
+                worksheet.Cells[row, 23].Value = item.As400StdPrice;
+                worksheet.Cells[row, 24].Value = item.As400TotalScrap;
+                worksheet.Cells[row, 25].Value = item.As400PriceQtyUnit;
+                worksheet.Cells[row, 26].Value = item.As400TotalQuantity;
+                worksheet.Cells[row, 27].Value = item.As400SumValue;
+                worksheet.Cells[row, 28].Value = item.As400SumTotalValue;
+                worksheet.Cells[row, 29].Value = item.AlternativeUnit;
+                worksheet.Cells[row, 30].Value = item.Numerator;
+                worksheet.Cells[row, 31].Value = item.Denominator;
+                worksheet.Cells[row, 32].Value = item.BaseUnit;
+                worksheet.Cells[row, 33].Value = item.StatusCheckUnit;
+                worksheet.Cells[row, 34].Value = item.StdpricePerConvertToSap;
+                worksheet.Cells[row, 35].Value = item.SumDeductedScrapInsapbaseunit;
+                worksheet.Cells[row, 36].Value = item.SumTotalQuantityInsapbaseunit;
+                worksheet.Cells[row, 37].Value = item.SumValueDeductedScrapInsapbaseunit;
+                worksheet.Cells[row, 38].Value = item.SumTotalValueInsapbaseunit;
+                worksheet.Cells[row, 39].Value = item.DiffStdPrice;
+                worksheet.Cells[row, 40].Value = item.DiffDeductedScrapInbaseunit;
+                worksheet.Cells[row, 41].Value = item.DiffTotalQuantityInbaseunit;
+                worksheet.Cells[row, 42].Value = item.DiffSumValueDeductedScrapInbaseunit;
+                worksheet.Cells[row, 43].Value = item.DiffSumTotalValueInsapbaseunit;
+                worksheet.Cells[row, 44].Value = item.PercentDiffStdPrice;
+                worksheet.Cells[row, 45].Value = item.PercentDiffDeductedScrapInbaseunit;
+                worksheet.Cells[row, 46].Value = item.PercentDiffTotalQuantityInbaseunit;
+                worksheet.Cells[row, 47].Value = item.PercentDiffSumValueDeductedScrapInbaseunit;
+                worksheet.Cells[row, 48].Value = item.PercentDiffSumTotalValueInsapbaseunit;
                 // ทำการเพิ่มขอบให้กับทุกเซลล์ที่มีข้อมูล
-                using (var range = worksheet.Cells[row, 1, row, 52]) // ขอบเขตของข้อมูลที่เพิ่มในแถวนี้
+                using (var range = worksheet.Cells[row, 1, row, 50]) // ขอบเขตของข้อมูลที่เพิ่มในแถวนี้
                 {
-                    range.Style.Border.Top.Style = ExcelBorderStyle.Thin;
-                    range.Style.Border.Left.Style = ExcelBorderStyle.Thin;
-                    range.Style.Border.Right.Style = ExcelBorderStyle.Thin;
+                    range.Style.Border.Top.Style    = ExcelBorderStyle.Thin;
+                    range.Style.Border.Left.Style   = ExcelBorderStyle.Thin;
+                    range.Style.Border.Right.Style  = ExcelBorderStyle.Thin;
                     range.Style.Border.Bottom.Style = ExcelBorderStyle.Thin;
                 }
                 //  Reasondedected
@@ -701,66 +697,66 @@ public class HomeController : Controller
                         item.SapComponent?.ToString()      == "" &&
                         item.SapQuantityUnit?.ToString()   == "")
                     {
-                        worksheet.Cells[row, 51].Value = "Z2 Key exists in AS400 but not in SAP" ;
-                        worksheet.Cells[row, 52].Value = "Z2 Key exists in AS400 but not in SAP" ;
+                        worksheet.Cells[row, 49].Value = "Z2 Key exists in AS400 but not in SAP" ;
+                        worksheet.Cells[row, 50].Value = "Z2 Key exists in AS400 but not in SAP" ;
                     } 
-                    else if (item.As400Model?.ToString()        == "" && 
+                    else if (item.As400Model?.ToString()   == "" && 
                         item.As400Plant?.ToString()        == "" && 
                         item.As400ParentMat?.ToString()    == "" &&
                         item.As400Component?.ToString()    == "" &&
                         item.As400QuantityUnit?.ToString() == "")
                     {
-                        worksheet.Cells[row, 51].Value = "Z1 Key exists in SAP but not in AS400" ;
-                        worksheet.Cells[row, 52].Value = "Z1 Key exists in SAP but not in AS400" ;
+                        worksheet.Cells[row, 49].Value = "Z1 Key exists in SAP but not in AS400" ;
+                        worksheet.Cells[row, 50].Value = "Z1 Key exists in SAP but not in AS400" ;
                     }
                     
                     else if (item.DiffSumValueDeductedScrapInbaseunit?.ToString() == "0.0000")
                     {
-                        worksheet.Cells[row, 51].Value = "No diff amount" ;
+                        worksheet.Cells[row, 49].Value = "No diff amount" ;
                     }
                     else if (item.DiffSumValueDeductedScrapInbaseunit?.ToString() != "0.0000" && 
                         item.DiffDeductedScrapInbaseunit?.ToString()      == "0.00000")
                     {
-                        worksheet.Cells[row, 51].Value = "Diff amount" ;
+                        worksheet.Cells[row, 49].Value = "Diff amount" ;
                     }
                     else if (item.DiffDeductedScrapInbaseunit?.ToString() != "0.00000" &&
                     item.DiffSumValueDeductedScrapInbaseunit?.ToString()  == "0.0000")
                     {
-                        worksheet.Cells[row, 51].Value = "Diff quantity" ;
+                        worksheet.Cells[row, 49].Value = "Diff quantity" ;
                     }
                     else if (item.DiffSumValueDeductedScrapInbaseunit?.ToString()  != "0.0000" && 
-                        item.DiffDeductedScrapInbaseunit?.ToString()       != "0.00000")
+                        item.DiffDeductedScrapInbaseunit?.ToString()               != "0.00000")
                     {
-                        worksheet.Cells[row, 51].Value = "Diff amount & diff quantity" ;
+                        worksheet.Cells[row, 49].Value = "Diff amount & diff quantity" ;
                     }
 
                    // Reasonincluded
-                    if (item.DiffTotalQuantityInbaseunit?.ToString() != "0.00000" &&
+                    if (item.DiffTotalQuantityInbaseunit?.ToString()        != "0.00000" &&
                         item.DiffSumTotalValueInsapbaseunit?.ToString()     == "0.0000" &&
                         item.Sapkey?.ToString()   != "" &&
                         item.As400key?.ToString() != "")
                     {
-                        worksheet.Cells[row, 52].Value = "Diff quantity" ;
+                        worksheet.Cells[row, 50].Value = "Diff quantity" ;
                     }
                    if (item.DiffSumTotalValueInsapbaseunit?.ToString() == "0.0000" &&
                         item.Sapkey?.ToString()   != "" &&
                         item.As400key?.ToString() != "")
                     {
-                        worksheet.Cells[row, 52].Value = "No diff amount" ;
+                        worksheet.Cells[row, 50].Value = "No diff amount" ;
                     }
                     if (item.DiffSumTotalValueInsapbaseunit?.ToString() != "0.0000" && 
-                        item.DiffTotalQuantityInbaseunit?.ToString()  == "0.00000" &&
+                        item.DiffTotalQuantityInbaseunit?.ToString()    == "0.00000" &&
                         item.Sapkey?.ToString()   != "" &&
                         item.As400key?.ToString() != "")
                     {
-                        worksheet.Cells[row, 52].Value = "Diff amount" ;
+                        worksheet.Cells[row, 50].Value = "Diff amount" ;
                     }
                     if (item.DiffSumTotalValueInsapbaseunit?.ToString()     != "0.0000" && 
-                        item.DiffTotalQuantityInbaseunit?.ToString()  != "0.00000" &&
+                        item.DiffTotalQuantityInbaseunit?.ToString()        != "0.00000" &&
                         item.Sapkey?.ToString()   != "" &&
                         item.As400key?.ToString() != "")
                     {
-                        worksheet.Cells[row, 52].Value = "Diff amount & diff quantity" ;
+                        worksheet.Cells[row, 50].Value = "Diff amount & diff quantity" ;
                     }
                 row++;
             }
@@ -797,10 +793,10 @@ public class HomeController : Controller
             worksheet.Cells[1, 6].Value  = "SapUnitQuantity";  
             worksheet.Cells[1, 7].Value  = "SapPricePerUnit";  
             worksheet.Cells[1, 8].Value  = "SapPriceQtyUnit";  
-            worksheet.Cells[1, 9].Value  = "SapCostRate";  
+            worksheet.Cells[1, 9].Value  = "SapProcessCostRate";  
             worksheet.Cells[1, 10].Value = "SapOhCostRate";  
-            worksheet.Cells[1, 11].Value = "SapTotalProcessCost";  
-            worksheet.Cells[1, 12].Value = "SapTotalOh";  
+            worksheet.Cells[1, 11].Value = "SapTotalProcessCostValue";  
+            worksheet.Cells[1, 12].Value = "SapTotalOhValue";  
             worksheet.Cells[1, 13].Value = "SapTotalValue"; 
             // กำหนดสีพื้นหลังของหัวข้อคอลัมน์เป็นสีเขียวอ่อน
             using (var range = worksheet.Cells[1, 1, 1, 13]) // ช่วง A1 ถึง M1
@@ -819,10 +815,10 @@ public class HomeController : Controller
             worksheet.Cells[1, 19].Value = "As400UnitQuantity";  
             worksheet.Cells[1, 20].Value = "As400PricePerUnit";  
             worksheet.Cells[1, 21].Value = "As400PriceQtyUnit";  
-            worksheet.Cells[1, 22].Value = "As400CostRate";  
+            worksheet.Cells[1, 22].Value = "As400ProcessCostRate";  
             worksheet.Cells[1, 23].Value = "As400OhCostRate";  
-            worksheet.Cells[1, 24].Value = "As400TotalProcessCost";  
-            worksheet.Cells[1, 25].Value = "As400TotalOh";  
+            worksheet.Cells[1, 24].Value = "As400TotalProcessCostValue";  
+            worksheet.Cells[1, 25].Value = "As400TotalOhValue";  
             worksheet.Cells[1, 26].Value = "As400TotalValue";  
              // กำหนดสีพื้นหลังของหัวข้อคอลัมน์เป็นสีเขียวอ่อน
             using (var range = worksheet.Cells[1, 14, 1, 26]) // ช่วง A1 ถึง M1
@@ -873,9 +869,9 @@ public class HomeController : Controller
             using (var range = worksheet.Cells[1, 1, 1, 39]) // เลือกช่วงที่มีข้อมูลทั้งหมด
             {
                 // ขีดเส้นขอบให้ทุกเซลล์
-                range.Style.Border.Top.Style = ExcelBorderStyle.Thin;    // ขอบบน
-                range.Style.Border.Left.Style = ExcelBorderStyle.Thin;   // ขอบซ้าย
-                range.Style.Border.Right.Style = ExcelBorderStyle.Thin;  // ขอบขวา
+                range.Style.Border.Top.Style    = ExcelBorderStyle.Thin;    // ขอบบน
+                range.Style.Border.Left.Style   = ExcelBorderStyle.Thin;   // ขอบซ้าย
+                range.Style.Border.Right.Style  = ExcelBorderStyle.Thin;  // ขอบขวา
                 range.Style.Border.Bottom.Style = ExcelBorderStyle.Thin; // ขอบล่าง
             }
 
@@ -1317,9 +1313,9 @@ public async Task<IActionResult> Upload(IFormFile file, string systemType, strin
             if (combinedRecords.ContainsKey(key))
             {
                 var existingRecord = combinedRecords[key];
-                existingRecord.TotalScrap += record.TotalScrap;
+                existingRecord.TotalScrap    += record.TotalScrap;
                 existingRecord.TotalQuantity += record.TotalQuantity;
-                existingRecord.SumValue += record.SumValue;
+                existingRecord.SumValue      += record.SumValue;
                 existingRecord.SumTotalValue += record.SumTotalValue;
             }
             else
@@ -1336,17 +1332,17 @@ public async Task<IActionResult> Upload(IFormFile file, string systemType, strin
         foreach (var combinedRecord in combinedRecords.Values)
         {
             var existingRecord = existingRecordsInDb
-                .FirstOrDefault(r => r.Model == combinedRecord.Model &&
-                                    r.Plant == combinedRecord.Plant &&
-                                    r.ParentMat == combinedRecord.ParentMat &&
-                                    r.Component == combinedRecord.Component &&
+                .FirstOrDefault(r => r.Model       == combinedRecord.Model &&
+                                    r.Plant        == combinedRecord.Plant &&
+                                    r.ParentMat    == combinedRecord.ParentMat &&
+                                    r.Component    == combinedRecord.Component &&
                                     r.QuantityUnit == combinedRecord.QuantityUnit);
 
             if (existingRecord != null)
             {
-                existingRecord.TotalScrap += combinedRecord.TotalScrap;
+                existingRecord.TotalScrap    += combinedRecord.TotalScrap;
                 existingRecord.TotalQuantity += combinedRecord.TotalQuantity;
-                existingRecord.SumValue += combinedRecord.SumValue;
+                existingRecord.SumValue      += combinedRecord.SumValue;
                 existingRecord.SumTotalValue += combinedRecord.SumTotalValue;
             }
             else
@@ -1368,11 +1364,11 @@ public async Task<IActionResult> Upload(IFormFile file, string systemType, strin
         int countModel = records.Select(r => r.Model).Distinct().Count();
         var logUpload = new LogUpload
         {
-            No = nextNo,
-            FileName = file.FileName,
-            Category = category,
-            OrderDate = DateOnly.FromDateTime(DateTime.Now),
-            Model = countModel,
+            No          = nextNo,
+            FileName    = file.FileName,
+            Category    = category,
+            OrderDate   = DateOnly.FromDateTime(DateTime.Now),
+            Model       = countModel,
             TotalRecord = records.Count,
             DateCreated = DateTime.Now
         };
@@ -1596,9 +1592,9 @@ public async Task<IActionResult> Upload(IFormFile file, string systemType, strin
                         {
                             // ถ้าพบข้อมูลซ้ำใน Dictionary ให้รวมค่าที่ต้องการ
                             var existingRecord = combinedRecords[key];
-                            existingRecord.TotalScrap += record.TotalScrap;
+                            existingRecord.TotalScrap    += record.TotalScrap;
                             existingRecord.TotalQuantity += record.TotalQuantity;
-                            existingRecord.SumValue += record.SumValue;
+                            existingRecord.SumValue      += record.SumValue;
                             existingRecord.SumTotalValue += record.SumTotalValue;
                         }
                         else
@@ -1617,18 +1613,18 @@ public async Task<IActionResult> Upload(IFormFile file, string systemType, strin
                     foreach (var combinedRecord in combinedRecords.Values)
                     {
                         var existingRecord = existingRecordsInDb
-                            .FirstOrDefault(r => r.Model == combinedRecord.Model &&
-                                                r.Plant == combinedRecord.Plant &&
-                                                r.ParentMat == combinedRecord.ParentMat &&
-                                                r.Component == combinedRecord.Component &&
+                            .FirstOrDefault(r => r.Model       == combinedRecord.Model &&
+                                                r.Plant        == combinedRecord.Plant &&
+                                                r.ParentMat    == combinedRecord.ParentMat &&
+                                                r.Component    == combinedRecord.Component &&
                                                 r.QuantityUnit == combinedRecord.QuantityUnit);
 
                         if (existingRecord != null)
                         {
                             // อัปเดตค่าถ้าพบข้อมูลในฐานข้อมูล
-                            existingRecord.TotalScrap += combinedRecord.TotalScrap;
+                            existingRecord.TotalScrap    += combinedRecord.TotalScrap;
                             existingRecord.TotalQuantity += combinedRecord.TotalQuantity;
-                            existingRecord.SumValue += combinedRecord.SumValue;
+                            existingRecord.SumValue      += combinedRecord.SumValue;
                             existingRecord.SumTotalValue += combinedRecord.SumTotalValue;
                         }
                         else
@@ -1653,11 +1649,11 @@ public async Task<IActionResult> Upload(IFormFile file, string systemType, strin
                 int countModel = records.Select(r => r.Model).Distinct().Count();
                 var logUpload = new LogUpload
                 {
-                    No = nextNo,
-                    FileName = file.FileName,
-                    Category = category,
-                    OrderDate = DateOnly.FromDateTime(DateTime.Now),
-                    Model = countModel,
+                    No          = nextNo,
+                    FileName    = file.FileName,
+                    Category    = category,
+                    OrderDate   = DateOnly.FromDateTime(DateTime.Now),
+                    Model       = countModel,
                     TotalRecord = records.Count,
                     DateCreated = DateTime.Now
                 };
@@ -1730,11 +1726,11 @@ public async Task<IActionResult> Upload(IFormFile file, string systemType, strin
                         int countModel = records.Select(r => r.Model).Distinct().Count();  
                         var logUpload = new LogUpload
                         {
-                            No = nextNo, // กำหนด No ที่คำนวณได้
-                            FileName = file.FileName,
-                            Category = category,
-                            OrderDate = DateOnly.FromDateTime(DateTime.Now), // กำหนดวันที่อัปโหลด
-                            Model = countModel,
+                            No          = nextNo, // กำหนด No ที่คำนวณได้
+                            FileName    = file.FileName,
+                            Category    = category,
+                            OrderDate   = DateOnly.FromDateTime(DateTime.Now), // กำหนดวันที่อัปโหลด
+                            Model       = countModel,
                             TotalRecord = records.Count,
                             DateCreated = DateTime.Now
                         };
@@ -1791,10 +1787,15 @@ public async Task<IActionResult> Upload(IFormFile file, string systemType, strin
 
                         if (existingRecord != null)
                         {
-                            existingRecord.TsQuantity     = record.TsQuantity;
-                            existingRecord.PricePerUnit   = record.PricePerUnit;
-                            existingRecord.ProcCostRate   = record.ProcCostRate;
-                            existingRecord.OhCostRate     = record.OhCostRate;
+                            existingRecord.TsQuantity        = record.TsQuantity;
+                            existingRecord.PricePerUnit      = record.PricePerUnit;
+                            existingRecord.ProcCostRate      = record.ProcCostRate;
+                            existingRecord.OhCostRate        = record.OhCostRate;
+                            existingRecord.TotalProcessCost  = record.TotalProcessCost;
+                            existingRecord.TotalOh           = record.TotalOh;
+                            existingRecord.TotalValue        = record.TotalValue;
+
+
                             // Update ฟิลด์
                             existingRecord.Model             = record.Model;
                             existingRecord.Plant             = record.Plant;
@@ -1824,13 +1825,13 @@ public async Task<IActionResult> Upload(IFormFile file, string systemType, strin
 
                         // บันทึกข้อมูลใน LogUpload
                         int countModel = records.Select(r => r.Model).Distinct().Count();  
-                        var logUpload = new LogUpload
+                        var logUpload  = new LogUpload
                         {
-                            No = nextNo, // กำหนด No ที่คำนวณได้
-                            FileName = file.FileName,
-                            Category = category,
-                            OrderDate = DateOnly.FromDateTime(DateTime.Now), // กำหนดวันที่อัปโหลด
-                            Model = countModel,
+                            No          = nextNo, // กำหนด No ที่คำนวณได้
+                            FileName    = file.FileName,
+                            Category    = category,
+                            OrderDate   = DateOnly.FromDateTime(DateTime.Now), // กำหนดวันที่อัปโหลด
+                            Model       = countModel,
                             TotalRecord = records.Count,
                             DateCreated = DateTime.Now
                         };
@@ -2083,11 +2084,11 @@ public async Task<IActionResult> UploadMasterData(IFormFile file, string masterT
                         int countModel = records.Select(r => r.Material).Distinct().Count();  
                         var logUpload = new LogUpload
                         {
-                            No = nextNo, // กำหนด No ที่คำนวณได้
-                            FileName = file.FileName,
-                            Category = masterType,
-                            OrderDate = DateOnly.FromDateTime(DateTime.Now), // กำหนดวันที่อัปโหลด
-                            Model = countModel,
+                            No          = nextNo, // กำหนด No ที่คำนวณได้
+                            FileName    = file.FileName,
+                            Category    = masterType,
+                            OrderDate   = DateOnly.FromDateTime(DateTime.Now), // กำหนดวันที่อัปโหลด
+                            Model       = countModel,
                             TotalRecord = records.Count,
                             DateCreated = DateTime.Now
                         };
@@ -2323,7 +2324,7 @@ public async Task<IActionResult> UploadMasterData(IFormFile file, string masterT
                     BaseUnit               = worksheet.Cells[row, 4].Text.Trim(),
                     MaterialType           = worksheet.Cells[row, 5].Text.Trim(),
                     MaterialGroup          = worksheet.Cells[row, 6].Text.Trim(),
-                    NetWeight              = decimal.TryParse(worksheet.Cells[row, 7].Text.Trim(), out var Denominator) ? Denominator : 0,
+                    NetWeight              = decimal.TryParse(worksheet.Cells[row, 7].Text.Trim(), out var NetWeight) ? NetWeight : 0,
                     WeightUnit             = worksheet.Cells[row, 8].Text.Trim(),
                 };
 
@@ -2477,47 +2478,47 @@ public async Task<IActionResult> UploadMasterData(IFormFile file, string masterT
             {
                 var record = new CostBomAs400
                 {
-                    Model = worksheet.Cells[row, 1].Text.Trim(),
-                    Plant = worksheet.Cells[row, 2].Text.Trim(),
-                    CostingRun = worksheet.Cells[row, 3].Text.Trim(),
-                    CostingRundt = worksheet.Cells[row, 4].Text.Trim(),
-                    RunningNo = int.TryParse(worksheet.Cells[row, 5].Text.Trim(), out var runningNo) ? runningNo : 0,
-                    Lv = int.TryParse(worksheet.Cells[row, 6].Text.Trim(), out var lv) ? lv : 0,
-                    ParentMat = worksheet.Cells[row, 7].Text.Trim(),
-                    ParentMatDesc = worksheet.Cells[row, 8].Text.Trim(),
-                    ParentProcTypeMm = worksheet.Cells[row, 9].Text.Trim(),
-                    ParentSpTypeMm = worksheet.Cells[row, 10].Text.Trim(),
-                    Component = worksheet.Cells[row, 11].Text.Trim(),
-                    ComponentDesc = worksheet.Cells[row, 12].Text.Trim(),
-                    ItemType = worksheet.Cells[row, 13].Text.Trim(),
-                    CompProcTypeMm = worksheet.Cells[row, 14].Text.Trim(),
-                    CompSpTypeMm = worksheet.Cells[row, 15].Text.Trim(),
-                    CompSpTypeBom = worksheet.Cells[row, 16].Text.Trim(),
-                    BulkMat = worksheet.Cells[row, 17].Text.Trim(),
-                    CostRelevancyBom = worksheet.Cells[row, 18].Text.Trim(),
-                    PhantomItem = worksheet.Cells[row, 19].Text.Trim(),
-                    DeletionIndicator = worksheet.Cells[row, 20].Text.Trim(),
-                    MatProvisionIndicator = worksheet.Cells[row, 21].Text.Trim(),
-                    CompEffectDtFrom = worksheet.Cells[row, 22].Text.Trim(),
-                    CompEffectDtTo = worksheet.Cells[row, 23].Text.Trim(),
-                    Unit = worksheet.Cells[row, 24].Text.Trim(),
-                    MSize = worksheet.Cells[row, 25].Text.Trim(),
-                    QuantityModel = worksheet.Cells[row, 26].Text.Trim(),
-                    Scrap = worksheet.Cells[row, 27].Text.Trim(),
-                    TotalScrap = decimal.TryParse(worksheet.Cells[row, 28].Text.Trim(), out var totalScrapValue) ? totalScrapValue : 0,
-                    TotalQuantity = decimal.TryParse(worksheet.Cells[row, 29].Text.Trim(), out var totalQuantityValue) ? totalQuantityValue : 0,
-                    QuantityUnit = worksheet.Cells[row, 30].Text.Trim(),
-                    Import = worksheet.Cells[row, 31].Text.Trim(),
-                    TaxExp = worksheet.Cells[row, 32].Text.Trim(),
-                    Local = worksheet.Cells[row, 33].Text.Trim(),
-                    StdPrice = worksheet.Cells[row, 34].Text.Trim(),
-                    PriceQtyUnit = worksheet.Cells[row, 35].Text.Trim(),
-                    NoPrice = worksheet.Cells[row, 36].Text.Trim(),
-                    NoCost = worksheet.Cells[row, 37].Text.Trim(),
-                    SumValue = decimal.TryParse(worksheet.Cells[row, 38].Text.Trim(), out var value) ? value : 0,
-                    SumTotalValue = decimal.TryParse(worksheet.Cells[row, 39].Text.Trim(), out var totalValue) ? totalValue : 0,
-                    PurPriceCur = worksheet.Cells[row, 40].Text.Trim(),
-                    ItemClass = worksheet.Cells[row, 41].Text.Trim()
+                    Model                   = worksheet.Cells[row, 1].Text.Trim(),
+                    Plant                   = worksheet.Cells[row, 2].Text.Trim(),
+                    CostingRun              = worksheet.Cells[row, 3].Text.Trim(),
+                    CostingRundt            = worksheet.Cells[row, 4].Text.Trim(),
+                    RunningNo               = int.TryParse(worksheet.Cells[row, 5].Text.Trim(), out var runningNo) ? runningNo : 0,
+                    Lv                      = int.TryParse(worksheet.Cells[row, 6].Text.Trim(), out var lv) ? lv : 0,
+                    ParentMat               = worksheet.Cells[row, 7].Text.Trim(),
+                    ParentMatDesc           = worksheet.Cells[row, 8].Text.Trim(),
+                    ParentProcTypeMm        = worksheet.Cells[row, 9].Text.Trim(),
+                    ParentSpTypeMm          = worksheet.Cells[row, 10].Text.Trim(),
+                    Component               = worksheet.Cells[row, 11].Text.Trim(),
+                    ComponentDesc           = worksheet.Cells[row, 12].Text.Trim(),
+                    ItemType                = worksheet.Cells[row, 13].Text.Trim(),
+                    CompProcTypeMm          = worksheet.Cells[row, 14].Text.Trim(),
+                    CompSpTypeMm            = worksheet.Cells[row, 15].Text.Trim(),
+                    CompSpTypeBom           = worksheet.Cells[row, 16].Text.Trim(),
+                    BulkMat                 = worksheet.Cells[row, 17].Text.Trim(),
+                    CostRelevancyBom        = worksheet.Cells[row, 18].Text.Trim(),
+                    PhantomItem             = worksheet.Cells[row, 19].Text.Trim(),
+                    DeletionIndicator       = worksheet.Cells[row, 20].Text.Trim(),
+                    MatProvisionIndicator   = worksheet.Cells[row, 21].Text.Trim(),
+                    CompEffectDtFrom        = worksheet.Cells[row, 22].Text.Trim(),
+                    CompEffectDtTo          = worksheet.Cells[row, 23].Text.Trim(),
+                    Unit                    = worksheet.Cells[row, 24].Text.Trim(),
+                    MSize                   = worksheet.Cells[row, 25].Text.Trim(),
+                    QuantityModel           = worksheet.Cells[row, 26].Text.Trim(),
+                    Scrap                   = worksheet.Cells[row, 27].Text.Trim(),
+                    TotalScrap              = decimal.TryParse(worksheet.Cells[row, 28].Text.Trim(), out var totalScrapValue) ? totalScrapValue : 0,
+                    TotalQuantity           = decimal.TryParse(worksheet.Cells[row, 29].Text.Trim(), out var totalQuantityValue) ? totalQuantityValue : 0,
+                    QuantityUnit            = worksheet.Cells[row, 30].Text.Trim(),
+                    Import                  = worksheet.Cells[row, 31].Text.Trim(),
+                    TaxExp                  = worksheet.Cells[row, 32].Text.Trim(),
+                    Local                   = worksheet.Cells[row, 33].Text.Trim(),
+                    StdPrice                = worksheet.Cells[row, 34].Text.Trim(),
+                    PriceQtyUnit            = worksheet.Cells[row, 35].Text.Trim(),
+                    NoPrice                 = worksheet.Cells[row, 36].Text.Trim(),
+                    NoCost                  = worksheet.Cells[row, 37].Text.Trim(),
+                    SumValue                = decimal.TryParse(worksheet.Cells[row, 38].Text.Trim(), out var value) ? value : 0,
+                    SumTotalValue           = decimal.TryParse(worksheet.Cells[row, 39].Text.Trim(), out var totalValue) ? totalValue : 0,
+                    PurPriceCur             = worksheet.Cells[row, 40].Text.Trim(),
+                    ItemClass               = worksheet.Cells[row, 41].Text.Trim()
                 };
 
                 records.Add(record);
@@ -2536,7 +2537,7 @@ public async Task<IActionResult> UploadMasterData(IFormFile file, string masterT
             using (var reader = new StreamReader(filePath))
             using (var csv = new CsvReader(reader, new CsvConfiguration(CultureInfo.InvariantCulture)
             {
-                Delimiter = ",",  // Use comma delimiter
+                Delimiter    = ",",  // Use comma delimiter
                 BadDataFound = null  // Ignore bad data rows
             }))
             {
@@ -2554,47 +2555,47 @@ public async Task<IActionResult> UploadMasterData(IFormFile file, string masterT
 
                     var record = new CostBomAs400
                     {
-                        Model = csv.GetField(0) ?? string.Empty,
-                        Plant = csv.GetField(1) ?? string.Empty,
-                        CostingRun = csv.GetField(2) ?? string.Empty,
-                        CostingRundt = csv.GetField(3) ?? string.Empty,
-                        RunningNo = int.TryParse(csv.GetField(4), out var runningNo) ? runningNo : 0,
-                        Lv = int.TryParse(csv.GetField(5), out var lv) ? lv : 0,
-                        ParentMat = csv.GetField(6) ?? string.Empty,
-                        ParentMatDesc = csv.GetField(7) ?? string.Empty,
-                        ParentProcTypeMm = csv.GetField(8) ?? string.Empty,
-                        ParentSpTypeMm = csv.GetField(9) ?? string.Empty,
-                        Component = csv.GetField(10) ?? string.Empty,
-                        ComponentDesc = csv.GetField(11) ?? string.Empty,
-                        ItemType = csv.GetField(12) ?? string.Empty,
-                        CompProcTypeMm = csv.GetField(13) ?? string.Empty,
-                        CompSpTypeMm = csv.GetField(14) ?? string.Empty,
-                        CompSpTypeBom = csv.GetField(15) ?? string.Empty,
-                        BulkMat = csv.GetField(16) ?? string.Empty,
-                        CostRelevancyBom = csv.GetField(17) ?? string.Empty,
-                        PhantomItem = csv.GetField(18) ?? string.Empty,
-                        DeletionIndicator = csv.GetField(19) ?? string.Empty,
-                        MatProvisionIndicator = csv.GetField(20) ?? string.Empty,
-                        CompEffectDtFrom = csv.GetField(21) ?? string.Empty,
-                        CompEffectDtTo = csv.GetField(22) ?? string.Empty,
-                        Unit = csv.GetField(23) ?? string.Empty,
-                        MSize = csv.GetField(24) ?? string.Empty,
-                        QuantityModel = csv.GetField(25) ?? string.Empty,
-                        Scrap = csv.GetField(26) ?? string.Empty,
-                        TotalScrap = decimal.TryParse(csv.GetField(27), out var scrapQtyValue) ? scrapQtyValue : 0,
-                        TotalQuantity = decimal.TryParse(csv.GetField(28), out var totalQuantityValue) ? totalQuantityValue : 0,
-                        QuantityUnit = csv.GetField(29) ?? string.Empty,
-                        Import = csv.GetField(30) ?? string.Empty,
-                        TaxExp = csv.GetField(31) ?? string.Empty,
-                        Local = csv.GetField(32) ?? string.Empty,
-                        StdPrice = csv.GetField(33) ?? string.Empty,
-                        PriceQtyUnit = csv.GetField(34) ?? string.Empty,
-                        NoPrice = csv.GetField(35) ?? string.Empty,
-                        NoCost = csv.GetField(36) ?? string.Empty,
-                        SumValue = decimal.TryParse(csv.GetField(37), out var value) ? value : 0,
-                        SumTotalValue = decimal.TryParse(csv.GetField(38), out var totalValue) ? totalValue : 0,
-                        PurPriceCur = csv.GetField(39) ?? string.Empty,
-                        ItemClass = csv.GetField(40) ?? string.Empty
+                        Model                       = csv.GetField(0) ?? string.Empty,
+                        Plant                       = csv.GetField(1) ?? string.Empty,
+                        CostingRun                  = csv.GetField(2) ?? string.Empty,
+                        CostingRundt                = csv.GetField(3) ?? string.Empty,
+                        RunningNo                   = int.TryParse(csv.GetField(4), out var runningNo) ? runningNo : 0,
+                        Lv                          = int.TryParse(csv.GetField(5), out var lv) ? lv : 0,
+                        ParentMat                   = csv.GetField(6) ?? string.Empty,
+                        ParentMatDesc               = csv.GetField(7) ?? string.Empty,
+                        ParentProcTypeMm            = csv.GetField(8) ?? string.Empty,
+                        ParentSpTypeMm              = csv.GetField(9) ?? string.Empty,
+                        Component                   = csv.GetField(10) ?? string.Empty,
+                        ComponentDesc               = csv.GetField(11) ?? string.Empty,
+                        ItemType                    = csv.GetField(12) ?? string.Empty,
+                        CompProcTypeMm              = csv.GetField(13) ?? string.Empty,
+                        CompSpTypeMm                = csv.GetField(14) ?? string.Empty,
+                        CompSpTypeBom               = csv.GetField(15) ?? string.Empty,
+                        BulkMat                     = csv.GetField(16) ?? string.Empty,
+                        CostRelevancyBom            = csv.GetField(17) ?? string.Empty,
+                        PhantomItem                 = csv.GetField(18) ?? string.Empty,
+                        DeletionIndicator           = csv.GetField(19) ?? string.Empty,
+                        MatProvisionIndicator       = csv.GetField(20) ?? string.Empty,
+                        CompEffectDtFrom            = csv.GetField(21) ?? string.Empty,
+                        CompEffectDtTo              = csv.GetField(22) ?? string.Empty,
+                        Unit                        = csv.GetField(23) ?? string.Empty,
+                        MSize                       = csv.GetField(24) ?? string.Empty,
+                        QuantityModel               = csv.GetField(25) ?? string.Empty,
+                        Scrap                       = csv.GetField(26) ?? string.Empty,
+                        TotalScrap                  = decimal.TryParse(csv.GetField(27), out var scrapQtyValue) ? scrapQtyValue : 0,
+                        TotalQuantity               = decimal.TryParse(csv.GetField(28), out var totalQuantityValue) ? totalQuantityValue : 0,
+                        QuantityUnit                = csv.GetField(29) ?? string.Empty,
+                        Import                      = csv.GetField(30) ?? string.Empty,
+                        TaxExp                      = csv.GetField(31) ?? string.Empty,
+                        Local                       = csv.GetField(32) ?? string.Empty,
+                        StdPrice                    = csv.GetField(33) ?? string.Empty,
+                        PriceQtyUnit                = csv.GetField(34) ?? string.Empty,
+                        NoPrice                     = csv.GetField(35) ?? string.Empty,
+                        NoCost                      = csv.GetField(36) ?? string.Empty,
+                        SumValue                    = decimal.TryParse(csv.GetField(37), out var value) ? value : 0,
+                        SumTotalValue               = decimal.TryParse(csv.GetField(38), out var totalValue) ? totalValue : 0,
+                        PurPriceCur                 = csv.GetField(39) ?? string.Empty,
+                        ItemClass                   = csv.GetField(40) ?? string.Empty
                     };
 
                     records.Add(record);
@@ -2623,19 +2624,19 @@ public async Task<IActionResult> UploadMasterData(IFormFile file, string masterT
             {
                 var record = new TotalCostAs400
                 {
-                    FiscalYear = worksheet.Cells[row, 1].Text.Trim(),
-                    Model = worksheet.Cells[row, 2].Text.Trim(),
-                    MaterialCost = decimal.TryParse(worksheet.Cells[row, 3].Text.Trim(), out var MaterialCost) ? MaterialCost : 0,
-                    ProcessCost = decimal.TryParse(worksheet.Cells[row, 4].Text.Trim(), out var ProcessCost) ? ProcessCost : 0,
-                    Ohcost = decimal.TryParse(worksheet.Cells[row, 5].Text.Trim(), out var Ohcost) ? Ohcost : 0,
-                    Srvpackingpercent = worksheet.Cells[row, 6].Text.Trim(),
-                    SrvpackingCost = worksheet.Cells[row, 7].Text.Trim(),
-                    TotalStdcost = decimal.TryParse(worksheet.Cells[row, 8].Text.Trim(), out var TotalStdcost) ? TotalStdcost : 0,
-                    TotalStdcostRound = decimal.TryParse(worksheet.Cells[row, 9].Text.Trim(), out var TotalStdcostRound) ? TotalStdcostRound : 0,
-                    Unit = worksheet.Cells[row, 10].Text.Trim(),
-                    Priceperunit = worksheet.Cells[row, 11].Text.Trim(),
-                    TotalTs = decimal.TryParse(worksheet.Cells[row, 12].Text.Trim(), out var TotalTs) ? TotalTs : 0,
-                    Tsunit = worksheet.Cells[row, 13].Text.Trim()
+                    FiscalYear                  = worksheet.Cells[row, 1].Text.Trim(),
+                    Model                       = worksheet.Cells[row, 2].Text.Trim(),
+                    MaterialCost                = decimal.TryParse(worksheet.Cells[row, 3].Text.Trim(), out var MaterialCost) ? MaterialCost : 0,
+                    ProcessCost                 = decimal.TryParse(worksheet.Cells[row, 4].Text.Trim(), out var ProcessCost) ? ProcessCost : 0,
+                    Ohcost                      = decimal.TryParse(worksheet.Cells[row, 5].Text.Trim(), out var Ohcost) ? Ohcost : 0,
+                    Srvpackingpercent           = worksheet.Cells[row, 6].Text.Trim(),
+                    SrvpackingCost              = worksheet.Cells[row, 7].Text.Trim(),
+                    TotalStdcost                = decimal.TryParse(worksheet.Cells[row, 8].Text.Trim(), out var TotalStdcost) ? TotalStdcost : 0,
+                    TotalStdcostRound           = decimal.TryParse(worksheet.Cells[row, 9].Text.Trim(), out var TotalStdcostRound) ? TotalStdcostRound : 0,
+                    Unit                        = worksheet.Cells[row, 10].Text.Trim(),
+                    Priceperunit                = worksheet.Cells[row, 11].Text.Trim(),
+                    TotalTs                     = decimal.TryParse(worksheet.Cells[row, 12].Text.Trim(), out var TotalTs) ? TotalTs : 0,
+                    Tsunit                      = worksheet.Cells[row, 13].Text.Trim()
                 };
 
                 records.Add(record);
@@ -2670,19 +2671,19 @@ public async Task<IActionResult> UploadMasterData(IFormFile file, string masterT
 
                     var record = new TotalCostAs400
                     {
-                        FiscalYear = csv.GetField(0) ?? string.Empty,
-                        Model = csv.GetField(1) ?? string.Empty,
-                        MaterialCost = decimal.TryParse(csv.GetField(2), out var MaterialCost) ? MaterialCost : 0,
-                        ProcessCost = decimal.TryParse(csv.GetField(3), out var ProcessCost) ? ProcessCost : 0,
-                        Ohcost = int.TryParse(csv.GetField(4), out var lv) ? lv : 0,
-                        Srvpackingpercent = csv.GetField(5) ?? string.Empty,
-                        SrvpackingCost = csv.GetField(6) ?? string.Empty,
-                        TotalStdcost = decimal.TryParse(csv.GetField(7), out var TotalStdcost) ? TotalStdcost : 0,
-                        TotalStdcostRound = decimal.TryParse(csv.GetField(8), out var TotalStdcostRound) ? TotalStdcostRound : 0,
-                        Unit = csv.GetField(9) ?? string.Empty,
-                        Priceperunit = csv.GetField(10) ?? string.Empty,
-                        TotalTs = decimal.TryParse(csv.GetField(11), out var TotalTs) ? TotalTs : 0,
-                        Tsunit = csv.GetField(12) ?? string.Empty,
+                        FiscalYear              = csv.GetField(0) ?? string.Empty,
+                        Model                   = csv.GetField(1) ?? string.Empty,
+                        MaterialCost            = decimal.TryParse(csv.GetField(2), out var MaterialCost) ? MaterialCost : 0,
+                        ProcessCost             = decimal.TryParse(csv.GetField(3), out var ProcessCost) ? ProcessCost : 0,
+                        Ohcost                  = int.TryParse(csv.GetField(4), out var lv) ? lv : 0,
+                        Srvpackingpercent       = csv.GetField(5) ?? string.Empty,
+                        SrvpackingCost          = csv.GetField(6) ?? string.Empty,
+                        TotalStdcost            = decimal.TryParse(csv.GetField(7), out var TotalStdcost) ? TotalStdcost : 0,
+                        TotalStdcostRound       = decimal.TryParse(csv.GetField(8), out var TotalStdcostRound) ? TotalStdcostRound : 0,
+                        Unit                    = csv.GetField(9) ?? string.Empty,
+                        Priceperunit            = csv.GetField(10) ?? string.Empty,
+                        TotalTs                 = decimal.TryParse(csv.GetField(11), out var TotalTs) ? TotalTs : 0,
+                        Tsunit                  = csv.GetField(12) ?? string.Empty,
                     };
 
                     records.Add(record);
@@ -2711,19 +2712,19 @@ public async Task<IActionResult> UploadMasterData(IFormFile file, string masterT
             {
                 var record = new TotalCostSap
                 {
-                    FiscalYear = worksheet.Cells[row, 1].Text.Trim(),
-                    Model = worksheet.Cells[row, 2].Text.Trim(),
-                    MaterialCost = decimal.TryParse(worksheet.Cells[row, 3].Text.Trim(), out var MaterialCost) ? MaterialCost : 0,
-                    ProcessCost = decimal.TryParse(worksheet.Cells[row, 4].Text.Trim(), out var ProcessCost) ? ProcessCost : 0,
-                    Ohcost = decimal.TryParse(worksheet.Cells[row, 5].Text.Trim(), out var Ohcost) ? Ohcost : 0,
-                    Srvpackingpercent = worksheet.Cells[row, 6].Text.Trim(),
-                    SrvpackingCost = worksheet.Cells[row, 7].Text.Trim(),
-                    TotalStdcost = decimal.TryParse(worksheet.Cells[row, 8].Text.Trim(), out var TotalStdcost) ? TotalStdcost : 0,
-                    TotalStdcostRound = decimal.TryParse(worksheet.Cells[row, 9].Text.Trim(), out var TotalStdcostRound) ? TotalStdcostRound : 0,
-                    Unit = worksheet.Cells[row, 10].Text.Trim(),
-                    Priceperunit = worksheet.Cells[row, 11].Text.Trim(),
-                    TotalTs = decimal.TryParse(worksheet.Cells[row, 12].Text.Trim(), out var TotalTs) ? TotalTs : 0,
-                    Tsunit = worksheet.Cells[row, 13].Text.Trim()
+                    FiscalYear              = worksheet.Cells[row, 1].Text.Trim(),
+                    Model                   = worksheet.Cells[row, 2].Text.Trim(),
+                    MaterialCost            = decimal.TryParse(worksheet.Cells[row, 3].Text.Trim(), out var MaterialCost) ? MaterialCost : 0,
+                    ProcessCost             = decimal.TryParse(worksheet.Cells[row, 4].Text.Trim(), out var ProcessCost) ? ProcessCost : 0,
+                    Ohcost                  = decimal.TryParse(worksheet.Cells[row, 5].Text.Trim(), out var Ohcost) ? Ohcost : 0,
+                    Srvpackingpercent       = worksheet.Cells[row, 6].Text.Trim(),
+                    SrvpackingCost          = worksheet.Cells[row, 7].Text.Trim(),
+                    TotalStdcost            = decimal.TryParse(worksheet.Cells[row, 8].Text.Trim(), out var TotalStdcost) ? TotalStdcost : 0,
+                    TotalStdcostRound       = decimal.TryParse(worksheet.Cells[row, 9].Text.Trim(), out var TotalStdcostRound) ? TotalStdcostRound : 0,
+                    Unit                    = worksheet.Cells[row, 10].Text.Trim(),
+                    Priceperunit            = worksheet.Cells[row, 11].Text.Trim(),
+                    TotalTs                 = decimal.TryParse(worksheet.Cells[row, 12].Text.Trim(), out var TotalTs) ? TotalTs : 0,
+                    Tsunit                  = worksheet.Cells[row, 13].Text.Trim()
                 };
 
                 records.Add(record);
@@ -2740,9 +2741,9 @@ public async Task<IActionResult> UploadMasterData(IFormFile file, string masterT
         try
         {
             using (var reader = new StreamReader(filePath))
-            using (var csv = new CsvReader(reader, new CsvConfiguration(CultureInfo.InvariantCulture)
+            using (var csv    = new CsvReader(reader, new CsvConfiguration(CultureInfo.InvariantCulture)
             {
-                Delimiter = ",",  // Use comma delimiter
+                Delimiter    = ",",  // Use comma delimiter
                 BadDataFound = null  // Ignore bad data rows
             }))
             {
@@ -2758,19 +2759,19 @@ public async Task<IActionResult> UploadMasterData(IFormFile file, string masterT
 
                     var record = new TotalCostSap
                     {
-                        FiscalYear = csv.GetField(0) ?? string.Empty,
-                        Model = csv.GetField(1) ?? string.Empty,
-                        MaterialCost = decimal.TryParse(csv.GetField(2), out var MaterialCost) ? MaterialCost : 0,
-                        ProcessCost = decimal.TryParse(csv.GetField(3), out var ProcessCost) ? ProcessCost : 0,
-                        Ohcost = int.TryParse(csv.GetField(4), out var lv) ? lv : 0,
-                        Srvpackingpercent = csv.GetField(5) ?? string.Empty,
-                        SrvpackingCost = csv.GetField(6) ?? string.Empty,
-                        TotalStdcost = decimal.TryParse(csv.GetField(7), out var TotalStdcost) ? TotalStdcost : 0,
-                        TotalStdcostRound = decimal.TryParse(csv.GetField(8), out var TotalStdcostRound) ? TotalStdcostRound : 0,
-                        Unit = csv.GetField(9) ?? string.Empty,
-                        Priceperunit = csv.GetField(10) ?? string.Empty,
-                        TotalTs = decimal.TryParse(csv.GetField(11), out var TotalTs) ? TotalTs : 0,
-                        Tsunit = csv.GetField(12) ?? string.Empty,
+                        FiscalYear              = csv.GetField(0) ?? string.Empty,
+                        Model                   = csv.GetField(1) ?? string.Empty,
+                        MaterialCost            = decimal.TryParse(csv.GetField(2), out var MaterialCost) ? MaterialCost : 0,
+                        ProcessCost             = decimal.TryParse(csv.GetField(3), out var ProcessCost) ? ProcessCost : 0,
+                        Ohcost                  = int.TryParse(csv.GetField(4), out var lv) ? lv : 0,
+                        Srvpackingpercent       = csv.GetField(5) ?? string.Empty,
+                        SrvpackingCost          = csv.GetField(6) ?? string.Empty,
+                        TotalStdcost            = decimal.TryParse(csv.GetField(7), out var TotalStdcost) ? TotalStdcost : 0,
+                        TotalStdcostRound       = decimal.TryParse(csv.GetField(8), out var TotalStdcostRound) ? TotalStdcostRound : 0,
+                        Unit                    = csv.GetField(9) ?? string.Empty,
+                        Priceperunit            = csv.GetField(10) ?? string.Empty,
+                        TotalTs                 = decimal.TryParse(csv.GetField(11), out var TotalTs) ? TotalTs : 0,
+                        Tsunit                  = csv.GetField(12) ?? string.Empty,
                     };
 
                     records.Add(record);
@@ -2799,47 +2800,47 @@ public async Task<IActionResult> UploadMasterData(IFormFile file, string masterT
             {
                 var record = new CostBomSap
                 {
-                    Model = worksheet.Cells[row, 1].Text.Trim(),
-                    Plant = worksheet.Cells[row, 2].Text.Trim(),
-                    CostingRun = worksheet.Cells[row, 3].Text.Trim(),
-                    CostingRundt = worksheet.Cells[row, 4].Text.Trim(),
-                    RunningNo = int.TryParse(worksheet.Cells[row, 5].Text.Trim(), out var runningNo) ? runningNo : 0,
-                    Lv = int.TryParse(worksheet.Cells[row, 6].Text.Trim(), out var lv) ? lv : 0,
-                    ParentMat = worksheet.Cells[row, 7].Text.Trim(),
-                    ParentMatDesc = worksheet.Cells[row, 8].Text.Trim(),
-                    ParentProcTypeMm = worksheet.Cells[row, 9].Text.Trim(),
-                    ParentSpTypeMm = worksheet.Cells[row, 10].Text.Trim(),
-                    Component = worksheet.Cells[row, 11].Text.Trim(),
-                    ComponentDesc = worksheet.Cells[row, 12].Text.Trim(),
-                    ItemType = worksheet.Cells[row, 13].Text.Trim(),
-                    CompProcTypeMm = worksheet.Cells[row, 14].Text.Trim(),
-                    CompSpTypeMm = worksheet.Cells[row, 15].Text.Trim(),
-                    CompSpTypeBom = worksheet.Cells[row, 16].Text.Trim(),
-                    BulkMat = worksheet.Cells[row, 17].Text.Trim(),
-                    CostRelevancyBom = worksheet.Cells[row, 18].Text.Trim(),
-                    PhantomItem = worksheet.Cells[row, 19].Text.Trim(),
-                    DeletionIndicator = worksheet.Cells[row, 20].Text.Trim(),
-                    MatProvisionIndicator = worksheet.Cells[row, 21].Text.Trim(),
-                    CompEffectDtFrom = worksheet.Cells[row, 22].Text.Trim(),
-                    CompEffectDtTo = worksheet.Cells[row, 23].Text.Trim(),
-                    Unit = worksheet.Cells[row, 24].Text.Trim(),
-                    MSize = worksheet.Cells[row, 25].Text.Trim(),
-                    QuantityModel = worksheet.Cells[row, 26].Text.Trim(),
-                    Scrap = worksheet.Cells[row, 27].Text.Trim(),
-                    TotalScrap = decimal.TryParse(worksheet.Cells[row, 28].Text.Trim(), out var totalScrapValue) ? totalScrapValue : 0,
-                    TotalQuantity = decimal.TryParse(worksheet.Cells[row, 29].Text.Trim(), out var totalQuantityValue) ? totalQuantityValue : 0,
-                    QuantityUnit = worksheet.Cells[row, 30].Text.Trim(),
-                    Import = worksheet.Cells[row, 31].Text.Trim(),
-                    TaxExp = worksheet.Cells[row, 32].Text.Trim(),
-                    Local = worksheet.Cells[row, 33].Text.Trim(),
-                    StdPrice = worksheet.Cells[row, 34].Text.Trim(),
-                    PriceQtyUnit = worksheet.Cells[row, 35].Text.Trim(),
-                    NoPrice = worksheet.Cells[row, 36].Text.Trim(),
-                    NoCost = worksheet.Cells[row, 37].Text.Trim(),
-                    SumValue = decimal.TryParse(worksheet.Cells[row, 38].Text.Trim(), out var value) ? value : 0,
-                    SumTotalValue = decimal.TryParse(worksheet.Cells[row, 39].Text.Trim(), out var totalValue) ? totalValue : 0,
-                    PurPriceCur = worksheet.Cells[row, 40].Text.Trim(),
-                    ItemClass = worksheet.Cells[row, 41].Text.Trim()
+                    Model                   = worksheet.Cells[row, 1].Text.Trim(),
+                    Plant                   = worksheet.Cells[row, 2].Text.Trim(),
+                    CostingRun              = worksheet.Cells[row, 3].Text.Trim(),
+                    CostingRundt            = worksheet.Cells[row, 4].Text.Trim(),
+                    RunningNo               = int.TryParse(worksheet.Cells[row, 5].Text.Trim(), out var runningNo) ? runningNo : 0,
+                    Lv                      = int.TryParse(worksheet.Cells[row, 6].Text.Trim(), out var lv) ? lv : 0,
+                    ParentMat               = worksheet.Cells[row, 7].Text.Trim(),
+                    ParentMatDesc           = worksheet.Cells[row, 8].Text.Trim(),
+                    ParentProcTypeMm        = worksheet.Cells[row, 9].Text.Trim(),
+                    ParentSpTypeMm          = worksheet.Cells[row, 10].Text.Trim(),
+                    Component               = worksheet.Cells[row, 11].Text.Trim(),
+                    ComponentDesc           = worksheet.Cells[row, 12].Text.Trim(),
+                    ItemType                = worksheet.Cells[row, 13].Text.Trim(),
+                    CompProcTypeMm          = worksheet.Cells[row, 14].Text.Trim(),
+                    CompSpTypeMm            = worksheet.Cells[row, 15].Text.Trim(),
+                    CompSpTypeBom           = worksheet.Cells[row, 16].Text.Trim(),
+                    BulkMat                 = worksheet.Cells[row, 17].Text.Trim(),
+                    CostRelevancyBom        = worksheet.Cells[row, 18].Text.Trim(),
+                    PhantomItem             = worksheet.Cells[row, 19].Text.Trim(),
+                    DeletionIndicator       = worksheet.Cells[row, 20].Text.Trim(),
+                    MatProvisionIndicator   = worksheet.Cells[row, 21].Text.Trim(),
+                    CompEffectDtFrom        = worksheet.Cells[row, 22].Text.Trim(),
+                    CompEffectDtTo          = worksheet.Cells[row, 23].Text.Trim(),
+                    Unit                    = worksheet.Cells[row, 24].Text.Trim(),
+                    MSize                   = worksheet.Cells[row, 25].Text.Trim(),
+                    QuantityModel           = worksheet.Cells[row, 26].Text.Trim(),
+                    Scrap                   = worksheet.Cells[row, 27].Text.Trim(),
+                    TotalScrap              = decimal.TryParse(worksheet.Cells[row, 28].Text.Trim(), out var totalScrapValue) ? totalScrapValue : 0,
+                    TotalQuantity           = decimal.TryParse(worksheet.Cells[row, 29].Text.Trim(), out var totalQuantityValue) ? totalQuantityValue : 0,
+                    QuantityUnit            = worksheet.Cells[row, 30].Text.Trim(),
+                    Import                  = worksheet.Cells[row, 31].Text.Trim(),
+                    TaxExp                  = worksheet.Cells[row, 32].Text.Trim(),
+                    Local                   = worksheet.Cells[row, 33].Text.Trim(),
+                    StdPrice                = worksheet.Cells[row, 34].Text.Trim(),
+                    PriceQtyUnit            = worksheet.Cells[row, 35].Text.Trim(),
+                    NoPrice                 = worksheet.Cells[row, 36].Text.Trim(),
+                    NoCost                  = worksheet.Cells[row, 37].Text.Trim(),
+                    SumValue                = decimal.TryParse(worksheet.Cells[row, 38].Text.Trim(), out var value) ? value : 0,
+                    SumTotalValue           = decimal.TryParse(worksheet.Cells[row, 39].Text.Trim(), out var totalValue) ? totalValue : 0,
+                    PurPriceCur             = worksheet.Cells[row, 40].Text.Trim(),
+                    ItemClass               = worksheet.Cells[row, 41].Text.Trim()
                 };
 
                 records.Add(record);
@@ -2856,9 +2857,9 @@ public async Task<IActionResult> UploadMasterData(IFormFile file, string masterT
         try
         {
             using (var reader = new StreamReader(filePath))
-            using (var csv = new CsvReader(reader, new CsvConfiguration(CultureInfo.InvariantCulture)
+            using (var csv    = new CsvReader(reader, new CsvConfiguration(CultureInfo.InvariantCulture)
             {
-                Delimiter = ",",  // Use comma delimiter
+                Delimiter    = ",",  // Use comma delimiter
                 BadDataFound = null  // Ignore bad data rows
             }))
             {
@@ -2877,47 +2878,47 @@ public async Task<IActionResult> UploadMasterData(IFormFile file, string masterT
 
                     var record = new CostBomSap
                     {
-                        Model = csv.GetField(0) ?? string.Empty,
-                        Plant = csv.GetField(1) ?? string.Empty,
-                        CostingRun = csv.GetField(2) ?? string.Empty,
-                        CostingRundt = csv.GetField(3) ?? string.Empty,
-                        RunningNo = int.TryParse(csv.GetField(4), out var runningNo) ? runningNo : 0,
-                        Lv = int.TryParse(csv.GetField(5), out var lv) ? lv : 0,
-                        ParentMat = csv.GetField(6) ?? string.Empty,
-                        ParentMatDesc = csv.GetField(7) ?? string.Empty,
-                        ParentProcTypeMm = csv.GetField(8) ?? string.Empty,
-                        ParentSpTypeMm = csv.GetField(9) ?? string.Empty,
-                        Component = csv.GetField(10) ?? string.Empty,
-                        ComponentDesc = csv.GetField(11) ?? string.Empty,
-                        ItemType = csv.GetField(12) ?? string.Empty,
-                        CompProcTypeMm = csv.GetField(13) ?? string.Empty,
-                        CompSpTypeMm = csv.GetField(14) ?? string.Empty,
-                        CompSpTypeBom = csv.GetField(15) ?? string.Empty,
-                        BulkMat = csv.GetField(16) ?? string.Empty,
-                        CostRelevancyBom = csv.GetField(17) ?? string.Empty,
-                        PhantomItem = csv.GetField(18) ?? string.Empty,
-                        DeletionIndicator = csv.GetField(19) ?? string.Empty,
-                        MatProvisionIndicator = csv.GetField(20) ?? string.Empty,
-                        CompEffectDtFrom = csv.GetField(21) ?? string.Empty,
-                        CompEffectDtTo = csv.GetField(22) ?? string.Empty,
-                        Unit = csv.GetField(23) ?? string.Empty,
-                        MSize = csv.GetField(24) ?? string.Empty,
-                        QuantityModel = csv.GetField(25) ?? string.Empty,
-                        Scrap = csv.GetField(26) ?? string.Empty,
-                        TotalScrap = decimal.TryParse(csv.GetField(27), out var scrapQtyValue) ? scrapQtyValue : 0,
-                        TotalQuantity = decimal.TryParse(csv.GetField(28), out var totalQuantityValue) ? totalQuantityValue : 0,
-                        QuantityUnit = csv.GetField(29) ?? string.Empty,
-                        Import = csv.GetField(30) ?? string.Empty,
-                        TaxExp = csv.GetField(31) ?? string.Empty,
-                        Local = csv.GetField(32) ?? string.Empty,
-                        StdPrice = csv.GetField(33) ?? string.Empty,
-                        PriceQtyUnit = csv.GetField(34) ?? string.Empty,
-                        NoPrice = csv.GetField(35) ?? string.Empty,
-                        NoCost = csv.GetField(36) ?? string.Empty,
-                        SumValue = decimal.TryParse(csv.GetField(37), out var value) ? value : 0,
-                        SumTotalValue = decimal.TryParse(csv.GetField(38), out var totalValue) ? totalValue : 0,
-                        PurPriceCur = csv.GetField(39) ?? string.Empty,
-                        ItemClass = csv.GetField(40) ?? string.Empty
+                        Model                   = csv.GetField(0) ?? string.Empty,
+                        Plant                   = csv.GetField(1) ?? string.Empty,
+                        CostingRun              = csv.GetField(2) ?? string.Empty,
+                        CostingRundt            = csv.GetField(3) ?? string.Empty,
+                        RunningNo               = int.TryParse(csv.GetField(4), out var runningNo) ? runningNo : 0,
+                        Lv                      = int.TryParse(csv.GetField(5), out var lv) ? lv : 0,
+                        ParentMat               = csv.GetField(6) ?? string.Empty,
+                        ParentMatDesc           = csv.GetField(7) ?? string.Empty,
+                        ParentProcTypeMm        = csv.GetField(8) ?? string.Empty,
+                        ParentSpTypeMm          = csv.GetField(9) ?? string.Empty,
+                        Component               = csv.GetField(10) ?? string.Empty,
+                        ComponentDesc           = csv.GetField(11) ?? string.Empty,
+                        ItemType                = csv.GetField(12) ?? string.Empty,
+                        CompProcTypeMm          = csv.GetField(13) ?? string.Empty,
+                        CompSpTypeMm            = csv.GetField(14) ?? string.Empty,
+                        CompSpTypeBom           = csv.GetField(15) ?? string.Empty,
+                        BulkMat                 = csv.GetField(16) ?? string.Empty,
+                        CostRelevancyBom        = csv.GetField(17) ?? string.Empty,
+                        PhantomItem             = csv.GetField(18) ?? string.Empty,
+                        DeletionIndicator       = csv.GetField(19) ?? string.Empty,
+                        MatProvisionIndicator   = csv.GetField(20) ?? string.Empty,
+                        CompEffectDtFrom        = csv.GetField(21) ?? string.Empty,
+                        CompEffectDtTo          = csv.GetField(22) ?? string.Empty,
+                        Unit                    = csv.GetField(23) ?? string.Empty,
+                        MSize                   = csv.GetField(24) ?? string.Empty,
+                        QuantityModel           = csv.GetField(25) ?? string.Empty,
+                        Scrap                   = csv.GetField(26) ?? string.Empty,
+                        TotalScrap              = decimal.TryParse(csv.GetField(27), out var scrapQtyValue) ? scrapQtyValue : 0,
+                        TotalQuantity           = decimal.TryParse(csv.GetField(28), out var totalQuantityValue) ? totalQuantityValue : 0,
+                        QuantityUnit            = csv.GetField(29) ?? string.Empty,
+                        Import                  = csv.GetField(30) ?? string.Empty,
+                        TaxExp                  = csv.GetField(31) ?? string.Empty,
+                        Local                   = csv.GetField(32) ?? string.Empty,
+                        StdPrice                = csv.GetField(33) ?? string.Empty,
+                        PriceQtyUnit            = csv.GetField(34) ?? string.Empty,
+                        NoPrice                 = csv.GetField(35) ?? string.Empty,
+                        NoCost                  = csv.GetField(36) ?? string.Empty,
+                        SumValue                = decimal.TryParse(csv.GetField(37), out var value) ? value : 0,
+                        SumTotalValue           = decimal.TryParse(csv.GetField(38), out var totalValue) ? totalValue : 0,
+                        PurPriceCur             = csv.GetField(39) ?? string.Empty,
+                        ItemClass               = csv.GetField(40) ?? string.Empty
                     };
 
                     records.Add(record);

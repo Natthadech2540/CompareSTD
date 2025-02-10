@@ -16,11 +16,11 @@ public partial class CompareOhcost
 
     public decimal SapTsQuantity { get; set; }
 
-    public decimal SapUnitQuantity { get; set; }
+    public string SapUnitQuantity { get; set; } = null!;
 
     public decimal SapPricePerUnit { get; set; }
 
-    public decimal SapPriceQtyUnit { get; set; }
+    public string SapPriceQtyUnit { get; set; } = null!;
 
     public decimal SapCostRate { get; set; }
 
@@ -42,11 +42,11 @@ public partial class CompareOhcost
 
     public decimal As400TsQuantity { get; set; }
 
-    public decimal As400UnitQuantity { get; set; }
+    public string As400UnitQuantity { get; set; } = null!;
 
     public decimal As400PricePerUnit { get; set; }
 
-    public decimal As400PriceQtyUnit { get; set; }
+    public string As400PriceQtyUnit { get; set; } = null!;
 
     public decimal As400CostRate { get; set; }
 

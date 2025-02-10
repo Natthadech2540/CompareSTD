@@ -27,6 +27,12 @@
             border: 1px solid #ddd;
         }
 
+         /* เส้นขอบสำหรับตาราง */
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+        }
+
          /* Preload Modal */
     .preload-modal {
         display: flex; /* ใช้ Flexbox เพื่อจัดกึ่งกลาง */
@@ -114,7 +120,7 @@
                 <td>@item.Description</td>
                 <td>@item.Department</td>
                 <td>@item.Name1</td>
-                <td>@item.Createdatetime</td>
+                <td>@(item.Createdatetime.ToString("dd/MM/yyyy HH:mm:ss tt") ?? "-")</td>
             </tr>
         }
     </tbody>
@@ -168,8 +174,3 @@
         });
     });
 </script>
-
-
-
-
-

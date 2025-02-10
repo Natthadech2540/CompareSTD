@@ -236,7 +236,7 @@ public partial class STDContext : DbContext
                 .HasColumnType("decimal(16, 4)")
                 .HasColumnName("AS400_Price_Per_Unit");
             entity.Property(e => e.As400PriceQtyUnit)
-                .HasColumnType("decimal(16, 4)")
+                .HasMaxLength(100)
                 .HasColumnName("AS400_Price_Qty_Unit");
             entity.Property(e => e.As400TotalOh)
                 .HasColumnType("decimal(16, 4)")
@@ -251,7 +251,7 @@ public partial class STDContext : DbContext
                 .HasColumnType("decimal(16, 4)")
                 .HasColumnName("AS400_TS_Quantity");
             entity.Property(e => e.As400UnitQuantity)
-                .HasColumnType("decimal(16, 4)")
+                .HasMaxLength(100)
                 .HasColumnName("AS400_Unit_Quantity");
             entity.Property(e => e.DiffOhCostRate)
                 .HasColumnType("decimal(17, 4)")
@@ -317,7 +317,7 @@ public partial class STDContext : DbContext
                 .HasColumnType("decimal(16, 4)")
                 .HasColumnName("SAP_Price_Per_Unit");
             entity.Property(e => e.SapPriceQtyUnit)
-                .HasColumnType("decimal(16, 4)")
+                .HasMaxLength(100)
                 .HasColumnName("SAP_Price_Qty_Unit");
             entity.Property(e => e.SapTotalOh)
                 .HasColumnType("decimal(16, 4)")
@@ -332,7 +332,7 @@ public partial class STDContext : DbContext
                 .HasColumnType("decimal(16, 4)")
                 .HasColumnName("SAP_TS_Quantity");
             entity.Property(e => e.SapUnitQuantity)
-                .HasColumnType("decimal(16, 4)")
+                .HasMaxLength(100)
                 .HasColumnName("SAP_Unit_Quantity");
         });
 

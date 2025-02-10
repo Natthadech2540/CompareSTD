@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("TemplateSTD")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Release")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+3c925d9cdd114853057e1b1bc2e89b12dd0d5c25")]
 [assembly: System.Reflection.AssemblyProductAttribute("TemplateSTD")]
 [assembly: System.Reflection.AssemblyTitleAttribute("TemplateSTD")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

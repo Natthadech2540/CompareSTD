@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "JpOmA1wiiMULq+uKQ1nSvsoptP4u6Qa7k08PU0NKvAQ=",
+  "Hash": "whbH8j3+SkCVTwhSTnpdWlYP20yT8WsenmJWXQ8otXw=",
   "Source": "TemplateSTD",
   "BasePath": "_content/TemplateSTD",
   "Mode": "Default",
@@ -1195,12 +1195,12 @@
       "OriginalItemSpec": "wwwroot\\lib\\jquery-validation-unobtrusive\\LICENSE.txt"
     },
     {
-      "Identity": "C:\\project\\C#NET\\TemplateSTD\\wwwroot\\uploads\\65TG1L.xlsx",
+      "Identity": "C:\\project\\C#NET\\TemplateSTD\\wwwroot\\uploads\\TotalCostAS400Mass&Service(157Model).xlsx",
       "SourceId": "TemplateSTD",
       "SourceType": "Discovered",
       "ContentRoot": "C:\\project\\C#NET\\TemplateSTD\\wwwroot\\",
       "BasePath": "_content/TemplateSTD",
-      "RelativePath": "uploads/65TG1L.xlsx",
+      "RelativePath": "uploads/TotalCostAS400Mass&Service(157Model).xlsx",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
@@ -1211,7 +1211,7 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\uploads\\65TG1L.xlsx"
+      "OriginalItemSpec": "wwwroot\\uploads\\TotalCostAS400Mass&Service(157Model).xlsx"
     }
   ]
 }

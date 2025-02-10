@@ -245,8 +245,8 @@
       "PackagePath": "staticwebassets\\lib\\jquery\\dist\\jquery.min.map"
     },
     {
-      "Id": "C:\\project\\C#NET\\TemplateSTD\\wwwroot\\uploads\\65TG1L.xlsx",
-      "PackagePath": "staticwebassets\\uploads\\65TG1L.xlsx"
+      "Id": "C:\\project\\C#NET\\TemplateSTD\\wwwroot\\uploads\\TotalCostAS400Mass&Service(157Model).xlsx",
+      "PackagePath": "staticwebassets\\uploads\\TotalCostAS400Mass&Service(157Model).xlsx"
     },
     {
       "Id": "obj\\Release\\net8.0\\staticwebassets\\msbuild.TemplateSTD.Microsoft.AspNetCore.StaticWebAssets.props",

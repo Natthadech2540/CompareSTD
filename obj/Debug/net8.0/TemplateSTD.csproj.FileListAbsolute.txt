@@ -193,3 +193,11 @@ c:\project\C#NET\TemplateSTD\bin\Debug\net8.0\runtimes\win\lib\net8.0\Microsoft.
 c:\project\C#NET\TemplateSTD\bin\Debug\net8.0\runtimes\win-x64\native\SqlServerSpatial160.dll
 c:\project\C#NET\TemplateSTD\bin\Debug\net8.0\runtimes\win-x86\native\SqlServerSpatial160.dll
 c:\project\C#NET\TemplateSTD\bin\Debug\net8.0\runtimes\win\lib\net8.0\System.Runtime.Caching.dll
+c:\project\C#NET\TemplateSTD\obj\Debug\net8.0\TemplateSTD.sourcelink.json
+c:\project\C#NET\TemplateSTD\bin\Debug\net8.0\TemplateSTD\web.config
+c:\project\C#NET\TemplateSTD\bin\Debug\net8.0\TemplateSTD\appsettings.Development.json
+c:\project\C#NET\TemplateSTD\bin\Debug\net8.0\TemplateSTD\appsettings.json
+c:\project\C#NET\TemplateSTD\bin\Debug\net8.0\TemplateSTD\package-lock.json
+c:\project\C#NET\TemplateSTD\bin\Debug\net8.0\TemplateSTD\package.json
+c:\project\C#NET\TemplateSTD\bin\Debug\net8.0\TemplateSTD\TemplateSTD.deps.json
+c:\project\C#NET\TemplateSTD\bin\Debug\net8.0\TemplateSTD\TemplateSTD.runtimeconfig.json
